@@ -71,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Center(
               child: Text(
-                "Lets get Started",
+                "Let's get Started",
                 style: poppinFonts(Colors.white, FontWeight.w600, 20),
               ),
             ),
@@ -81,6 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                 style: poppinFonts(Colors.white, FontWeight.normal, 15),
               ),
             ),
+            SizedBox(height: size.height/30,),
             GestureDetector(
               onTap: () async {
               setState(() {
