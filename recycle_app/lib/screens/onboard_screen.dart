@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:recycle_app/constants/constants.dart';
+import 'package:recycle_app/screens/confirmation_page.dart';
 
 class OnBoardScreen extends StatefulWidget {
   const OnBoardScreen({Key? key}) : super(key: key);
@@ -27,7 +28,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-              SizedBox(
+            SizedBox(
               height: size.height / 15,
             ),
             Center(
@@ -42,31 +43,39 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
             ),
             Text(
               "Save our planet!",
-              style: poppinFonts(Colors.white,FontWeight.bold, 30),
+              style: poppinFonts(Colors.white, FontWeight.bold, 30),
             ),
-            Text("Sort trash with other users\nand help save the planet for posterity",
-            style: poppinFonts(Colors.white, FontWeight.normal, 19),
+            Text(
+              "Sort trash with other users\nand help save the planet for posterity",
+              style: poppinFonts(Colors.white, FontWeight.normal, 19),
             ),
-
             Center(
               child: GestureDetector(
-                onTap: (){
+                onTap: () async {
                   setState(() {
                     press = !press;
                   });
+                  Future.delayed(const Duration(milliseconds: 500), () {
+                    setState(() {
+                      press = !press;
+                    });
+                  });
+                  await Navigator.pushNamed(context, LoginPage.id);
                 },
                 child: Container(
                   width: size.width / 1.1,
                   height: size.height / 13,
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors : press ? [Colors.blue, Colors.red] : [
-                    const Color(0xff00548e),
-                     const Color(0xff009297)
-                    ]),    
+                      gradient: LinearGradient(
+                          colors: press
+                              ? [Colors.blue, Colors.red]
+                              : [
+                                  const Color(0xff00548e),
+                                  const Color(0xff009297)
+                                ]),
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: kButtonShadows),
-                  child:const Center(
+                  child: const Center(
                     child: Text(
                       "Start",
                       style: TextStyle(
