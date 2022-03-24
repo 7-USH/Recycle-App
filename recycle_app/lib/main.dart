@@ -3,6 +3,7 @@ import 'package:recycle_app/screens/confirmation_page.dart';
 import 'package:recycle_app/screens/create_page.dart';
 import 'package:recycle_app/screens/login_page.dart';
 import 'package:recycle_app/screens/onboard_screen.dart';
+import 'package:recycle_app/screens/verification_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,8 +20,9 @@ class MyApp extends StatelessWidget {
       home: const OnBoardScreen(),
       routes: {
         LoginPage.id :(context) => LoginPage(),
-        LoginPhone.id : (context) => LoginPhone(),
-        CreateAccountPage.id : (context) => CreateAccountPage()
+        LoginPhone.id : (context) => const LoginPhone(),
+        CreateAccountPage.id : (context) => CreateAccountPage(),
+        VerificationPage.id : (context) =>const  VerificationPage(),
       }
     );
   }

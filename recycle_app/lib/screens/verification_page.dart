@@ -1,34 +1,25 @@
-// ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures, unnecessary_this, avoid_print
+// ignore_for_file: sized_box_for_whitespace, unused_element, prefer_is_empty
 
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:recycle_app/constants/constants.dart';
-import 'package:recycle_app/screens/verification_page.dart';
 
-class LoginPhone extends StatefulWidget {
-  const LoginPhone({Key? key}) : super(key: key);
-  static String id = "login";
+class VerificationPage extends StatefulWidget {
+  const VerificationPage({Key? key}) : super(key: key);
+  static String id = "verify";
 
   @override
-  State<LoginPhone> createState() => _LoginPhoneState();
+  State<VerificationPage> createState() => _VerificationPageState();
 }
 
-class _LoginPhoneState extends State<LoginPhone> {
+class _VerificationPageState extends State<VerificationPage> {
   bool press = false;
   Color onPressColor = const Color(0xff01661c).withOpacity(0.5);
   Color buttonColor = const Color(0xff01661c);
   final TextEditingController _controller = TextEditingController();
   bool isPhone = false;
 
-  bool numberValidator(int number) {
-    int n = number.toString().length;
-    if (n == 10 && !number.toString().contains(RegExp(r'[A-Z]'))) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,27 +44,26 @@ class _LoginPhoneState extends State<LoginPhone> {
           padding: const EdgeInsets.all(25.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Center(
                 child: AvatarGlow(
-                  endRadius: 150,
+                  endRadius: 100,
                   glowColor: Colors.blueAccent,
                   repeat: true,
                   child: Lottie.network(
                     "https://assets3.lottiefiles.com/packages/lf20_mftd0tzf.json",
-                    width: 300,
+                    width: 200,
                     repeat: true,
                   ),
                 ),
               ),
               Text(
-                "Login",
+                "Verification",
                 style: poppinFonts(Colors.white, FontWeight.bold, 30),
               ),
               Text(
-                "Add your phone number, we'll send you a verification code \nso we know you're real",
-                style: poppinFonts(Colors.white, FontWeight.normal, 12),
+                "Enter your OTP code number",
+                style: poppinFonts(Colors.white, FontWeight.normal, 15),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
@@ -86,36 +76,19 @@ class _LoginPhoneState extends State<LoginPhone> {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(children: [
-                  TextFormField(
-                    controller: _controller,
-                    keyboardType: TextInputType.number,
-                    style: poppinFonts(Colors.white, FontWeight.normal, 18),
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(10)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(10)),
-                      prefix: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8),
-                        child: Text('(+91)',
-                            style: poppinFonts(
-                                Colors.white, FontWeight.normal, 15)),
-                      ),
-                      suffixIcon: Icon(
-                        Icons.check_circle,
-                        color: isPhone ? Colors.green : scaffoldColor,
-                        size: 32,
-                      ),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        _textFieldOTP(first: true, last: false),
+                        _textFieldOTP(first: false, last: false),
+                        _textFieldOTP(first: false, last: false),
+                        _textFieldOTP(first: false, last: true),
+                      ],
                     ),
-                    onChanged: (value) {
-                      isPhone =
-                          this.numberValidator(int.parse(_controller.text));
-                      setState(() {});
-                      //TOD0: login page
-                    },
-                  ),
+                  )
                 ]),
               ),
               SizedBox(
@@ -131,7 +104,6 @@ class _LoginPhoneState extends State<LoginPhone> {
                       press = !press;
                     });
                   });
-                  Navigator.pushNamed(context, VerificationPage.id);
                 },
                 child: Container(
                   width: size.width / 1.1,
@@ -148,7 +120,7 @@ class _LoginPhoneState extends State<LoginPhone> {
                       boxShadow: kButtonShadows),
                   child: const Center(
                     child: Text(
-                      "Send",
+                      "Verify",
                       style: TextStyle(
                           fontFamily: 'Poppins',
                           fontSize: 22,
@@ -158,10 +130,74 @@ class _LoginPhoneState extends State<LoginPhone> {
                   ),
                 ),
               ),
+                SizedBox(
+                height: size.height / 35,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Didn't you receive any code ?",
+                    style: poppinFonts(Colors.white, FontWeight.normal, 15),
+                  ),
+                  TextButton(onPressed: (){
+                    
+                    //TODO
+
+                  }, child:  Text(
+                      "Resend Code",
+                      style: poppinFonts(Colors.white, FontWeight.bold, 15),
+                    ),
+                  )
+                ],
+              )
+              
+
             ],
           ),
         ),
       ),
     );
   }
+
+
+  Widget _textFieldOTP({required bool first, last}) {
+    return Container(
+      height: 75,
+      child: Center(
+        child: AspectRatio(
+          aspectRatio: 0.8,
+          child: TextField(
+            autofocus: true,
+            onChanged: (value) {
+              if (value.length == 1 && last == false) {
+                FocusScope.of(context).nextFocus();
+              }
+              if (value.length == 0 && first == false) {
+                FocusScope.of(context).previousFocus();
+              }
+            },
+            showCursor: false,
+            readOnly: false,
+            textAlign: TextAlign.center,
+            style: poppinFonts(Colors.white, FontWeight.normal, 20),
+            keyboardType: TextInputType.number,
+            maxLength: 1,
+            decoration: InputDecoration(
+              counter: const Offstage(),
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(width: 2, color: Colors.grey.withOpacity(0.2)),
+                  borderRadius: BorderRadius.circular(12)),
+              focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(width: 2, color: Colors.white),
+                  borderRadius: BorderRadius.circular(12)),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
 }
+
+
