@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 List<BoxShadow> kBoxShadows = [
   BoxShadow(
@@ -22,11 +23,8 @@ List<BoxShadow> kButtonShadows = [
 ];
 
 TextStyle poppinFonts(Color color, FontWeight fontWeight, double size) {
-  return TextStyle(
-      color: color,
-      fontWeight: fontWeight,
-      fontFamily: 'Poppins',
-      fontSize: size);
+  return GoogleFonts.poppins(
+      fontSize: size, color: color, fontWeight: fontWeight);
 }
 
 Color scaffoldColor = const Color(0xff181920);
