@@ -48,7 +48,7 @@ class _LoginPhoneState extends State<LoginPhone> {
         ),
       ),
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: PageScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(25.0),
           child: Column(

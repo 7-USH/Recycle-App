@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:recycle_app/screens/confirmation_page.dart';
 import 'package:recycle_app/screens/create_page.dart';
+import 'package:recycle_app/screens/home.dart';
+import 'package:recycle_app/screens/loading_screen.dart';
 import 'package:recycle_app/screens/login_page.dart';
 import 'package:recycle_app/screens/onboard_screen.dart';
 import 'package:recycle_app/screens/verification_page.dart';
