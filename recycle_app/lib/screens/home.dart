@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:recycle_app/constants/constants.dart';
+import 'package:recycle_app/service/location.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
+
   final screens = [
     const Center(
       child: Text(
@@ -30,6 +32,13 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    getcurrentlocation();
+    super.initState();
+  }
+
   final TextEditingController _controller = new TextEditingController();
 
   @override
@@ -39,7 +48,9 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: scaffoldColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          
+        },
         child: FaIcon(
           FontAwesomeIcons.add,
           color: scaffoldColor,
@@ -51,10 +62,10 @@ class _HomePageState extends State<HomePage> {
         elevation: 2,
       ),
       body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-          SizedBox(height: 50,),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          SizedBox(
+            height: 50,
+          ),
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Row(
@@ -62,9 +73,13 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CircleAvatar(
-                    //TODO
+                  //TODO
+                  radius: 30,
                 ),
-                Text("200 points",style: poppinFonts(Colors.white, FontWeight.normal, 15),)
+                Text(
+                  "200 points",
+                  style: poppinFonts(Colors.white, FontWeight.normal, 15),
+                )
               ],
             ),
           ),
