@@ -26,12 +26,13 @@ class _FormscreenState extends State<Formscreen> {
   double _slidervalue = 20;
 
   List list = ["Glass", "Paper/Plastic", "Electronics", "Chemical"];
+   String? valueChoose;
+
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    String? valueChoose;
-
+   
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: scaffoldColor,
@@ -100,13 +101,24 @@ class _FormscreenState extends State<Formscreen> {
                       Padding(
                         padding: const EdgeInsets.all(0.0),
                         child: Container(
-                          height: size.height / 12,
+                          height: size.height / 10,
                           width: size.width,
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.white, width: 1),
                             borderRadius: BorderRadius.circular(25),
                           ),
                           child: DropdownButton(
+                            hint: Padding(
+                              padding: const EdgeInsets.all(22.0),
+                              child: Text("Select Material Type",
+                                style: poppinFonts(
+                                    Colors.white, FontWeight.normal, 15),
+                              ),
+                            ),
+                            disabledHint: Text("Select Material Type",style: poppinFonts(
+                                  Colors.white, FontWeight.normal, 15),) ,
+                            itemHeight:100,
+                            alignment: AlignmentDirectional.center,
                             style: poppinFonts(
                                 Colors.white, FontWeight.normal, 15),
                             dropdownColor: scaffoldColor,
@@ -120,7 +132,11 @@ class _FormscreenState extends State<Formscreen> {
                             ),
                             value: valueChoose,
                             items: list.map((e) {
-                              return DropdownMenuItem(value: e, child: Text(e));
+                              return DropdownMenuItem(value: e, child: Container(
+                                width: 140,
+                                height: 20,
+                                child: Center(
+                                  child: Text(e,textAlign: TextAlign.center,))));
                             }).toList(),
                             onChanged: (newValue) {
                               valueChoose = newValue as String;
