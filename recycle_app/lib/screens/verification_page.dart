@@ -5,7 +5,6 @@ import 'package:lottie/lottie.dart';
 
 import 'package:recycle_app/constants/constants.dart';
 import 'package:recycle_app/screens/home.dart';
-import 'package:recycle_app/screens/home.dart';
 
 class VerificationPage extends StatefulWidget {
   final String phone;
@@ -120,9 +119,6 @@ class _VerificationPageState extends State<VerificationPage> {
                       press = !press;
                     });
                   });
-
-                   Navigator.pushNamed(context, HomePage.id);
-
                   (pin) async {
                     try {
                       await FirebaseAuth.instance
@@ -133,12 +129,12 @@ class _VerificationPageState extends State<VerificationPage> {
                         ),
                       )
                           .then((value) async {
-                        // if (value.user != null) {
-                        // }
+                        if (value.user != null) {
+                          print("HOGAYA BC");
+                        }
                       });
                     } catch (e) {
-                      print("F");
-
+                      print(e.toString());
                     }
                   };
                 },
