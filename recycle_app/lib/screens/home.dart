@@ -31,11 +31,11 @@ class _HomePageState extends State<HomePage> {
       _selectedIndex = index;
     });
   }
-  if 
+  
 
   @override
   void initState() {
-    // TODO: implement initState
+    
     getcurrentlocation();
     super.initState();
   }
