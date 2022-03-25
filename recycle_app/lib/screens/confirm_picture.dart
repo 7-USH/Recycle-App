@@ -11,6 +11,7 @@ import 'package:recycle_app/screens/forms.dart';
 
 class ConfirmPicture extends StatefulWidget {
   final XFile? photo;
+
   static String id = "Item Details";
   const ConfirmPicture({
     Key? key,
@@ -22,6 +23,8 @@ class ConfirmPicture extends StatefulWidget {
 }
 
 class _ConfirmPictureState extends State<ConfirmPicture> {
+  bool _press = true;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -32,16 +35,22 @@ class _ConfirmPictureState extends State<ConfirmPicture> {
         width: size.width,
         child: Stack(
           children: [
-            SizedBox(
-              height: size.height,
-              width: size.width,
-              child: ClipRect(
-                child: Image.file(
-                  File(widget.photo!.path),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+            _press
+                ? SizedBox(
+                    height: size.height,
+                    width: size.width,
+                    child: ClipRect(
+                      child: Image.file(
+                        File(widget.photo!.path),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  )
+                : const Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.blue,
+                    ),
+                  ),
             Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.transparent,
@@ -66,16 +75,19 @@ class _ConfirmPictureState extends State<ConfirmPicture> {
                       padding: const EdgeInsets.only(bottom: 32.0),
                       child: GestureDetector(
                         onTap: () async {
+                          _press = false;
+                          setState(() {});
                           String downloadURL = "";
                           if (widget.photo == null) return;
                           final destination = "${DateTime.now().hashCode}";
-                         
+
                           await FirebaseStorage.instance
                               .ref(destination)
                               .putFile(File(widget.photo!.path));
                           downloadURL = await FirebaseStorage.instance
                               .ref(destination)
                               .getDownloadURL();
+                          print("IMAGE URL : " + downloadURL);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
