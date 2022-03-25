@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
       _selectedIndex = index;
     });
   }
+  if 
 
   @override
   void initState() {
@@ -114,10 +115,12 @@ class _HomePageState extends State<HomePage> {
         // ignore: prefer_const_literals_to_create_immutables
         items: [
           const BottomNavigationBarItem(
+            
             icon: FaIcon(
               FontAwesomeIcons.home,
               color: Colors.white,
               size: 30
+              
             ),
             label: '',
           ), // ignore: prefer_const_constructors
@@ -125,6 +128,7 @@ class _HomePageState extends State<HomePage> {
             icon: const Icon(
               Icons.location_on,
               color: Colors.white,
+              
             ),
             label: '',
           ),
