@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const HomePage(),
+        home: Formscreen(),
         routes: {
           LoginPage.id: (context) => LoginPage(),
           LoginPhone.id: (context) => const LoginPhone(),
