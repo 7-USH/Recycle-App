@@ -60,9 +60,10 @@ class _CameraPageState extends State<CameraPage> {
               Scaffold(
                 appBar: AppBar(
                   leading: IconButton(
-                    icon: Icon(
+                    icon:const Icon(
                       Icons.arrow_back_ios_new,
                       color: Colors.black,
+                      size: 25,
                     ),
                     onPressed: () {
                       Navigator.pop(context);
@@ -70,9 +71,7 @@ class _CameraPageState extends State<CameraPage> {
                   ),
                   title: Text(
                     "Scan Trash",
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
+                    style: poppinFonts(Colors.black, FontWeight.bold, 20)
                   ),
                   backgroundColor: Colors.white.withOpacity(0.5),
                   elevation: 0,
