@@ -4,6 +4,8 @@
         android:label="recycle_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyD7yug9OH2fbahKcOugVq0y3vQHyC829no"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -37,6 +37,9 @@ dependencies:
   lottie: ^1.2.2
   avatar_glow: ^2.0.2
   google_fonts: ^2.3.1
+  firebase_core: ^1.13.1
+  firebase_auth: ^3.3.11
+  cloud_firestore: ^3.1.10
   animated_text_kit: ^4.2.1
 
 dev_dependencies:
