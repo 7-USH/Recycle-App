@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recycle_app/constants/constants.dart';
+import 'package:recycle_app/services/location..dart';
 class HomePage extends StatefulWidget {
   const HomePage({ Key? key }) : super(key: key);
   static String id = "home";
@@ -8,13 +9,28 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+
 class _HomePageState extends State<HomePage> {
+
   int curr=0;
   final screens =[
       const Center(child: Text('Home',style: TextStyle(fontSize: 40),),)
       
 
   ];
+  
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    
+    getcurrentlocation();
+    super.initState();
+
+    
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

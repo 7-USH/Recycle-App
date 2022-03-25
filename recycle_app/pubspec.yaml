@@ -41,6 +41,8 @@ dependencies:
   firebase_auth: ^3.3.11
   cloud_firestore: ^3.1.10
   animated_text_kit: ^4.2.1
+  geolocator: ^8.2.0
+  url_launcher: ^6.0.20
 
 dev_dependencies:
   flutter_test:
