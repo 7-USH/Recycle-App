@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:recycle_app/constants/constants.dart';
+import 'package:recycle_app/screens/recycleitem_page.dart';
 
 const double pinInvisible = -400;
 const double pinVisible = 20;
@@ -21,9 +22,7 @@ class MapsPage extends StatefulWidget {
 }
 
 class _MapsPageState extends State<MapsPage> {
-
   bool isTap = false;
-  
 
   Set<Marker> _markers = {};
   late BitmapDescriptor mapMarker;
@@ -50,16 +49,12 @@ class _MapsPageState extends State<MapsPage> {
         Marker(
           markerId: const MarkerId('id-1'),
           position: LatLng(widget.souLat, widget.souLon),
-          onTap: (){
+          onTap: () {
             isTap = !isTap;
             setState(() {});
           },
-          infoWindow: InfoWindow(
-              title: 'Temp',
-              snippet: 'Nice Place',
-              onTap: () {
-                
-              }),
+          infoWindow:
+              InfoWindow(title: 'Temp', snippet: 'Nice Place', onTap: () {}),
           icon: mapMarker,
         ),
       );
@@ -98,24 +93,37 @@ class _MapsPageState extends State<MapsPage> {
               });
             },
           ),
-         AnimatedPositioned(
-           curve: Curves.easeInOut,
-           bottom: isTap ? pinVisible : pinInvisible,
-           duration: const Duration(milliseconds: 500),
-           child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            clipBehavior: Clip.hardEdge,
-            margin: const EdgeInsets.all(20),
-            padding: const EdgeInsets.only(left: 20, right: 20),
-            height: size.height/5.5,
-            width: size.width / 1.2,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(50),
-                boxShadow: kButtonShadows),
-            child: const Center(
-              child: Text("My location"),
-            )
+          AnimatedPositioned(
+            curve: Curves.easeInOut,
+            bottom: isTap ? pinVisible : pinInvisible,
+            duration: const Duration(milliseconds: 500),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: ((context) => RecycleItemPage())));
+              },
+              child: Hero(
+                tag: "1",
+                child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    clipBehavior: Clip.hardEdge,
+                    margin: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.only(left: 20, right: 20),
+                    height: size.height / 5.5,
+                    width: size.width / 1.2,
+                    decoration: BoxDecoration(
+                        color: scaffoldColor.withOpacity(0.8),
+                        borderRadius: BorderRadius.circular(50),
+                        boxShadow: kButtonShadows),
+                    child: Center(
+                      child: Text(
+                        "My location",
+                        style: poppinFonts(Colors.white, FontWeight.normal, 20),
+                      ),
+                    )),
+              ),
             ),
           )
         ],

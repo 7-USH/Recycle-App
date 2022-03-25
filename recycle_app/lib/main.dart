@@ -34,16 +34,13 @@ class MyApp extends StatelessWidget {
         // home: Formscreen(),
         routes: {
           LoginPage.id: (context) => LoginPage(),
+          Formscreen.id:(context) => const Formscreen(),
           LoginPhone.id: (context) => const LoginPhone(),
           CreateAccountPage.id: (context) => CreateAccountPage(),
-          VerificationPage.id: (context) => const VerificationPage(
-                phone: '',
-              ),
+          VerificationPage.id: (context) => const VerificationPage( phone: '',),
           HomePage.id: (context) => const HomePage(),
           PhotoPage.id: (context) => PhotoPage(),
-          CameraPage.id: (context) => CameraPage(
-                cameras: cameras,
-              ),
+          CameraPage.id: (context) => CameraPage(cameras: cameras,),
         });
   }
 }
