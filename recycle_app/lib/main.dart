@@ -6,12 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:recycle_app/screens/MapsPage.dart';
 import 'package:recycle_app/screens/confirmation_page.dart';
 import 'package:recycle_app/screens/create_page.dart';
+import 'package:recycle_app/screens/forms.dart';
 import 'package:recycle_app/screens/home.dart';
 import 'package:recycle_app/screens/loading_screen.dart';
 import 'package:recycle_app/screens/login_page.dart';
 import 'package:recycle_app/screens/onboard_screen.dart';
 import 'package:recycle_app/screens/photo_page.dart';
 import 'package:recycle_app/screens/verification_page.dart';
+import 'package:recycle_app/screens/forms.dart';
 
 List<CameraDescription> cameras = [];
 Future<void> main() async {
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const OnBoardScreen(),
+        home: const HomePage(),
         routes: {
           LoginPage.id: (context) => LoginPage(),
           LoginPhone.id: (context) => const LoginPhone(),
@@ -37,7 +39,6 @@ class MyApp extends StatelessWidget {
                 phone: '',
               ),
           HomePage.id: (context) => const HomePage(),
-          MapsPage.id: (context) => const MapsPage(),
           PhotoPage.id: (context) => PhotoPage(),
           CameraPage.id: (context) => CameraPage(
                 cameras: cameras,
