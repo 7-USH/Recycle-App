@@ -1,9 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
 import 'package:recycle_app/constants/constants.dart';
 
 class CategoryPage extends StatefulWidget {
-  const CategoryPage({Key? key}) : super(key: key);
+  
+
+  String str;
+  CategoryPage({
+    Key? key,
+    required this.str,
+  }) : super(key: key);
 
   @override
   State<CategoryPage> createState() => _CategoryPageState();
@@ -20,7 +27,6 @@ class _CategoryPageState extends State<CategoryPage> {
         items.add(element.data());
       }
     });
-    print(items.length);
     setState(() {});
   }
 
