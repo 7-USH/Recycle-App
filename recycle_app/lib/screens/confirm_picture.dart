@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:recycle_app/constants/constants.dart';
+import 'package:recycle_app/screens/forms.dart';
 
 class ConfirmPicture extends StatelessWidget {
   final XFile? photo;
@@ -56,7 +57,7 @@ class ConfirmPicture extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 32.0),
                       child: GestureDetector(
                         onTap: () {
-                          
+                          Navigator.pushNamed(context, Formscreen.id);
                         },
                         child: Container(
                           width: size.width / 1.2,
