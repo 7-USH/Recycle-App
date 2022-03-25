@@ -4,6 +4,7 @@ import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:recycle_app/constants/constants.dart';
+import 'package:recycle_app/screens/verification_page.dart';
 
 class CreateAccountPage extends StatefulWidget {
   CreateAccountPage({Key? key}) : super(key: key);
@@ -16,8 +17,7 @@ class CreateAccountPage extends StatefulWidget {
 class _CreateAccountPageState extends State<CreateAccountPage> {
   TextEditingController _idController = new TextEditingController();
   TextEditingController _noController = new TextEditingController();
-    bool press = false;
-  
+  bool press = false;
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +95,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   keyboardType: TextInputType.number,
                   style: poppinFonts(Colors.white, FontWeight.normal, 18),
                   decoration: InputDecoration(
-                        hintText: "Phone-number",
+                    hintText: "Phone-number",
                     hintStyle: poppinFonts(Colors.white, FontWeight.normal, 15),
                     enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(color: Colors.white),
@@ -113,12 +113,11 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   onChanged: (value) {
                     //TOD0: login page
                   },
-                  
                 ),
-                  const SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                 GestureDetector(
+                GestureDetector(
                   onTap: () async {
                     setState(() {
                       press = !press;
@@ -130,7 +129,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                     });
 
                     //TODO:
-
+                    Navigator.pushNamed(context, VerificationPage.id);
                   },
                   child: Container(
                     width: size.width / 1.1,
