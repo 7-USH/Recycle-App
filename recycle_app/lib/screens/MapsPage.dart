@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapsPage extends StatefulWidget {
-  const MapsPage({Key? key}) : super(key: key);
+  MapsPage({Key? key, required this.souLat, required this.souLon})
+      : super(key: key);
   static String id = "home";
+  double souLat;
+  double souLon;
 
   @override
   State<MapsPage> createState() => _MapsPageState();
@@ -13,6 +16,8 @@ class _MapsPageState extends State<MapsPage> {
   bool isVisibile = false;
   Set<Marker> _markers = {};
   late BitmapDescriptor mapMarker;
+  double lat =0.0;
+  double lon =0.0;
 
   void setCustomMarker() async {
     mapMarker = await BitmapDescriptor.fromAssetImage(
@@ -22,6 +27,8 @@ class _MapsPageState extends State<MapsPage> {
   @override
   void initState() {
     super.initState();
+    lat = widget.souLat;
+    lon = widget.souLon;
     setCustomMarker();
   }
 
@@ -46,14 +53,16 @@ class _MapsPageState extends State<MapsPage> {
     });
   }
 
-  final CameraPosition _kGooglePlex = const CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
+  // ignore: prefer_final_fields
+  
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    CameraPosition _kGooglePlex = CameraPosition(
+      target: LatLng(lat, lon),
+      zoom: 14.4746,
+    );
 
     return Scaffold(
       body: Stack(

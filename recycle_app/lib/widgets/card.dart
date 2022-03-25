@@ -25,7 +25,7 @@ class _DetailCardState extends State<DetailCard> {
             height: size.height / 3,
             width: size.width / 1.1,
             decoration: BoxDecoration(
-              color: Colors.blueAccent,
+              color: Colors.blueAccent.withOpacity(0.3),
               borderRadius: BorderRadius.circular(20),
               boxShadow: kButtonShadows,
             ),

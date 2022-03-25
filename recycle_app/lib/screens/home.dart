@@ -36,15 +36,28 @@ class _HomePageState extends State<HomePage> {
     });
 
     if (_selectedIndex == 1) {
-      Navigator.pushNamed(context, MapsPage.id);
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return MapsPage(souLat: latitude, souLon: longitude);
+      }));
     }
+  }
+
+  late double latitude = 0;
+  late double longitude = 0;
+
+  void getLocation() async {
+    MyLocation location = MyLocation();
+    await location.getCurrentLocation();
+    latitude = await location.getLatitude();
+    print(latitude);
+    longitude = await location.getLongitude();
+    print(longitude);
+    setState(() {});
   }
 
   @override
   void initState() {
-    // TODO: implement initState
-    getcurrentlocation();
-    super.initState();
+    getLocation();
   }
 
   final TextEditingController _controller = new TextEditingController();
@@ -81,15 +94,18 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-             Container(
-               height: 40,
-               width: 40,
-               decoration: BoxDecoration(
-                 color: Colors.white,
-                 borderRadius: BorderRadius.circular(20)
-               ),
-               child: Icon(Icons.person,size: 25,color: scaffoldColor,),
-             ),
+              Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20)),
+                child: Icon(
+                  Icons.person,
+                  size: 25,
+                  color: scaffoldColor,
+                ),
+              ),
               Text(
                 "200 points",
                 style: poppinFonts(Colors.white, FontWeight.normal, 15),
@@ -122,43 +138,28 @@ class _HomePageState extends State<HomePage> {
             scrollDirection: Axis.horizontal,
             children: [
               GestureDetector(
-                onTap: (){
-
-                    
-
-                },
+                onTap: () {},
                 child: ListCard(
                     imgUrl: "assets/images/bottle.png",
                     color: Colors.grey.withOpacity(0.7)),
               ),
               GestureDetector(
-                onTap: (){
-
-                  
-
-                },
+                onTap: () {},
                 child: ListCard(
-                    imgUrl: "assets/images/documents.png", color: Colors.red.withOpacity(0.7)),
+                    imgUrl: "assets/images/documents.png",
+                    color: Colors.red.withOpacity(0.7)),
               ),
               GestureDetector(
-                onTap: (){
-
-
-
-                },
+                onTap: () {},
                 child: ListCard(
-                    imgUrl: "assets/images/electronic-devices.png", color: Colors.amber),
+                    imgUrl: "assets/images/electronic-devices.png",
+                    color: Colors.amber),
               ),
-                  GestureDetector(
-                onTap: (){
-
-
-
-                    },
+              GestureDetector(
+                onTap: () {},
                 child: ListCard(
-                    imgUrl: "assets/images/chemicals.png",
-                    color: Colors.white),
-                  ),
+                    imgUrl: "assets/images/chemicals.png", color: Colors.white),
+              ),
             ],
           ),
         )
