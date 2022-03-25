@@ -4,7 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:image_crop/image_crop.dart';
 import 'package:recycle_app/main.dart';
-import 'package:recycle_app/screens/item_details..dart';
+import 'package:recycle_app/screens/confirm_picture.dart';
 
 import '../constants/constants.dart';
 
@@ -57,45 +57,60 @@ class _CameraPageState extends State<CameraPage> {
                 height: size.height,
                 width: size.width,
               ),
-              Stack(
-                children: [
-                  Container(
-                    height: size.height,
-                    width: size.width,
-                    color: Colors.white.withOpacity(0.5),
+              Scaffold(
+                appBar: AppBar(
+                  leading: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios_new,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                   ),
-                  SizedBox(
-                    height: size.height,
-                    width: size.width,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: size.height / 4.5,
-                        ),
-                        CustomPaint(
-                          foregroundPainter: BorderPainter(),
-                          child: Container(
-                            height: size.height / 1.8,
-                            width: size.width / 1.4,
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              backgroundBlendMode: BlendMode.dstOut,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                        ),
-                      ],
+                  title: Text(
+                    "Scan Trash",
+                    style: TextStyle(
+                      color: Colors.black,
                     ),
                   ),
-                  SizedBox(
-                    height: size.height,
-                    width: size.width,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(32.0),
-                          child: GestureDetector(
+                  backgroundColor: Colors.white.withOpacity(0.5),
+                  elevation: 0,
+                ),
+                backgroundColor: Colors.transparent,
+                body: Stack(
+                  children: [
+                    Container(
+                      height: size.height,
+                      width: size.width,
+                      color: Colors.white.withOpacity(0.5),
+                    ),
+                    SizedBox(
+                      height: size.height,
+                      width: size.width,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Column(
+                            children: [
+                              SizedBox(
+                                height: size.height / 30,
+                              ),
+                              CustomPaint(
+                                foregroundPainter: BorderPainter(),
+                                child: Container(
+                                  height: size.height / 1.8,
+                                  width: size.width / 1.4,
+                                  decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    backgroundBlendMode: BlendMode.dstOut,
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          GestureDetector(
                             onTap: () async {
                               XFile? photo = await controller.takePicture();
                               if (photo != null) {
@@ -103,7 +118,7 @@ class _CameraPageState extends State<CameraPage> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        ItemDetails(photo: photo),
+                                        ConfirmPicture(photo: photo),
                                   ),
                                 );
                               }
@@ -116,11 +131,11 @@ class _CameraPageState extends State<CameraPage> {
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),

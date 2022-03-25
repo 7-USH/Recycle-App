@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:recycle_app/constants/constants.dart';
 import 'package:recycle_app/screens/camera_page.dart';
-import 'package:recycle_app/screens/item_details..dart';
+import 'package:recycle_app/screens/confirm_picture.dart';
 
 class PhotoPage extends StatefulWidget {
   PhotoPage({Key? key}) : super(key: key);

@@ -1,7 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:recycle_app/screens/camera_page.dart';
-import 'package:recycle_app/screens/item_details..dart';
 
 import 'package:recycle_app/screens/confirmation_page.dart';
 import 'package:recycle_app/screens/create_page.dart';
