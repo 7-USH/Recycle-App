@@ -81,15 +81,27 @@ class _CategoryPageState extends State<CategoryPage> {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
-                              "By ${items[index]["username"]}",
+                              "Weight: " + items[index]["weight"] + " kg",
                               style: poppinFonts(
-                                  scaffoldColor, FontWeight.bold, 15),
+                                  Colors.white, FontWeight.bold, 20),
                             ),
-                            Text("Description :" + items[index]["Description"],
-                                style: poppinFonts(
-                                    Colors.white, FontWeight.normal, 9)),
+                            Text(
+                              items[index]["Description"],
+                              style: poppinFonts(
+                                Colors.white,
+                                FontWeight.normal,
+                                12,
+                              ),
+                              textAlign: TextAlign.justify,
+                            ),
+                            Text(
+                              "by ${items[index]["username"]}",
+                              style: poppinFonts(
+                                  Colors.white, FontWeight.w200, 12),
+                            ),
                           ],
                         ),
                       ),

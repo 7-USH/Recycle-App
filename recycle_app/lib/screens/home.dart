@@ -148,8 +148,7 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
                 child: ListCard(
-                    imgUrl: "assets/images/bottle.png",
-                    color: Colors.white10),
+                    imgUrl: "assets/images/bottle.png", color: Colors.white10),
               ),
               GestureDetector(
                 onTap: () {
@@ -165,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white10),
               ),
               GestureDetector(
-                onTap: () {
+                  onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -173,10 +172,9 @@ class _HomePageState extends State<HomePage> {
                       ),
                     );
                   },
-                child: ListCard(
-                    imgUrl: "assets/images/electronic-devices.png",
-                    color: Colors.white10)),
-              
+                  child: ListCard(
+                      imgUrl: "assets/images/electronic-devices.png",
+                      color: Colors.white10)),
               GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -187,7 +185,20 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
                 child: ListCard(
-                    imgUrl: "assets/images/chemicals.png", color: Colors.white10),
+                    imgUrl: "assets/images/chemicals.png",
+                    color: Colors.white10),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CategoryPage(str: "Plastic"),
+                    ),
+                  );
+                },
+                child: ListCard(
+                    imgUrl: "assets/images/plastic.png", color: Colors.white10),
               ),
             ],
           ),

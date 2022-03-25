@@ -7,6 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:recycle_app/constants/constants.dart';
+import 'package:recycle_app/screens/camera_page.dart';
+import 'package:recycle_app/screens/home.dart';
 
 import '../service/location.dart';
 
@@ -59,7 +61,7 @@ class _FormscreenState extends State<Formscreen> {
       "latitude": latitude,
       "longitude": longitude,
       "image": widget.ImageURL,
-      "weight":_weight.text,
+      "weight": _weight.text,
     };
     FirebaseFirestore.instance
         .collection(valueChoose!)
@@ -307,6 +309,7 @@ class _FormscreenState extends State<Formscreen> {
                             });
                           });
                           addData();
+                          Navigator.pushReplacementNamed(context, HomePage.id);
                         },
                         child: Container(
                           width: size.width / 1.1,
