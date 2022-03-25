@@ -37,15 +37,28 @@ class _HomePageState extends State<HomePage> {
     });
 
     if (_selectedIndex == 1) {
-      Navigator.pushNamed(context, MapsPage.id);
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return MapsPage(souLat: latitude, souLon: longitude);
+      }));
     }
+  }
+
+  late double latitude = 0;
+  late double longitude = 0;
+
+  void getLocation() async {
+    MyLocation location = MyLocation();
+    await location.getCurrentLocation();
+    latitude = await location.getLatitude();
+    print(latitude);
+    longitude = await location.getLongitude();
+    print(longitude);
+    setState(() {});
   }
 
   @override
   void initState() {
-    // TODO: implement initState
-    getcurrentlocation();
-    super.initState();
+    getLocation();
   }
 
   final TextEditingController _controller = new TextEditingController();
@@ -82,9 +95,17 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CircleAvatar(
-                backgroundImage: AssetImage("assets/images/documents.png"),
-                radius: 30,
+              Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20)),
+                child: Icon(
+                  Icons.person,
+                  size: 25,
+                  color: scaffoldColor,
+                ),
               ),
               Text(
                 "200 points",

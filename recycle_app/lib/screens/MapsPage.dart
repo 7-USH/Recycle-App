@@ -1,18 +1,34 @@
+// ignore_for_file: avoid_types_as_parameter_names
+
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:recycle_app/constants/constants.dart';
+
+const double pinInvisible = -400;
+const double pinVisible = 20;
 
 class MapsPage extends StatefulWidget {
-  const MapsPage({Key? key}) : super(key: key);
+  MapsPage({Key? key, required this.souLat, required this.souLon})
+      : super(key: key);
   static String id = "home";
+  double souLat;
+  double souLon;
 
   @override
   State<MapsPage> createState() => _MapsPageState();
 }
 
 class _MapsPageState extends State<MapsPage> {
-  bool isVisibile = false;
+
+  bool isTap = false;
+  
+
   Set<Marker> _markers = {};
   late BitmapDescriptor mapMarker;
+  double lat = 0.0;
+  double lon = 0.0;
 
   void setCustomMarker() async {
     mapMarker = await BitmapDescriptor.fromAssetImage(
@@ -22,6 +38,8 @@ class _MapsPageState extends State<MapsPage> {
   @override
   void initState() {
     super.initState();
+    lat = widget.souLat;
+    lon = widget.souLon;
     setCustomMarker();
   }
 
@@ -31,14 +49,16 @@ class _MapsPageState extends State<MapsPage> {
       _markers.add(
         Marker(
           markerId: const MarkerId('id-1'),
-          position: const LatLng(37.42796133580664, -122.085749655962),
+          position: LatLng(widget.souLat, widget.souLon),
+          onTap: (){
+            isTap = !isTap;
+            setState(() {});
+          },
           infoWindow: InfoWindow(
               title: 'Temp',
               snippet: 'Nice Place',
               onTap: () {
-                setState(() {
-                  isVisibile = !isVisibile;
-                });
+                
               }),
           icon: mapMarker,
         ),
@@ -46,47 +66,58 @@ class _MapsPageState extends State<MapsPage> {
     });
   }
 
-  final CameraPosition _kGooglePlex = const CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
+  // ignore: prefer_final_fields
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
+    CameraPosition _kGooglePlex = CameraPosition(
+      target: LatLng(lat, lon),
+      zoom: 14.4746,
+    );
+
     return Scaffold(
       body: Stack(
+        alignment: Alignment.center,
         children: [
           GoogleMap(
+            mapToolbarEnabled: false,
             initialCameraPosition: _kGooglePlex,
             onMapCreated: _onMapCreated,
+            zoomControlsEnabled: false,
+            myLocationButtonEnabled: false,
+            myLocationEnabled: false,
+            rotateGesturesEnabled: false,
+            zoomGesturesEnabled: false,
+            compassEnabled: false,
             markers: _markers,
+            onTap: (LatLng) {
+              setState(() {
+                isTap = false;
+              });
+            },
           ),
-          AnimatedPositioned(
-            right: 0,
-            left: 0,
-            top: !isVisibile ? size.height : size.height - (size.height / 4),
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeInOut,
-            child: Container(
-              height: 800,
-              decoration: BoxDecoration(
+         AnimatedPositioned(
+           curve: Curves.easeInOut,
+           bottom: isTap ? pinVisible : pinInvisible,
+           duration: const Duration(milliseconds: 500),
+           child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            clipBehavior: Clip.hardEdge,
+            margin: const EdgeInsets.all(20),
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            height: size.height/5.5,
+            width: size.width / 1.2,
+            decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(40),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    blurRadius: 10,
-                    offset: Offset.zero,
-                  ),
-                ],
-              ),
-              width: double.infinity,
-              child:
-                  Padding(padding: const EdgeInsets.all(20), child: Column()),
+                borderRadius: BorderRadius.circular(50),
+                boxShadow: kButtonShadows),
+            child: const Center(
+              child: Text("My location"),
+            )
             ),
-          ),
+          )
         ],
       ),
     );

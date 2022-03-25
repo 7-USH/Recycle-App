@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:recycle_app/constants/constants.dart';
+import 'package:recycle_app/screens/forms.dart';
 
 class ConfirmPicture extends StatelessWidget {
   final XFile? photo;
@@ -35,19 +36,15 @@ class ConfirmPicture extends StatelessWidget {
             Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.transparent,
+                elevation: 0.0,
                 leading: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back_ios_new,
+                    size: 25,
                   ),
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                ),
-                title: Text(
-                  "Scan Trash",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
                 ),
               ),
               backgroundColor: Colors.transparent,
@@ -60,15 +57,15 @@ class ConfirmPicture extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 32.0),
                       child: GestureDetector(
                         onTap: () {
-                          
+                          Navigator.pushNamed(context, Formscreen.id);
                         },
                         child: Container(
                           width: size.width / 1.2,
                           height: size.height / 13,
                           decoration: BoxDecoration(
-                              gradient: LinearGradient(colors: [
-                                const Color(0xff00548e),
-                                const Color(0xff009297)
+                              gradient: const LinearGradient(colors: [
+                                 Color(0xff00548e),
+                                 Color(0xff009297)
                               ]),
                               borderRadius: BorderRadius.circular(20),
                               boxShadow: kButtonShadows),

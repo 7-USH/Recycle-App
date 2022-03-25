@@ -10,6 +10,9 @@ class DetailCard extends StatefulWidget {
 }
 
 class _DetailCardState extends State<DetailCard> {
+  
+
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -25,7 +28,7 @@ class _DetailCardState extends State<DetailCard> {
             height: size.height / 3,
             width: size.width / 1.1,
             decoration: BoxDecoration(
-              color: Colors.blueAccent,
+              color: Colors.blueAccent.withOpacity(0.3),
               borderRadius: BorderRadius.circular(20),
               boxShadow: kButtonShadows,
             ),
@@ -41,7 +44,7 @@ class _DetailCardState extends State<DetailCard> {
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Text("Earn points for \ndiscarded \ntrash",textAlign: TextAlign.start,
-                    style: poppinFonts(Colors.black, FontWeight.bold, 25),),
+                    style: poppinFonts(scaffoldColor, FontWeight.bold, 25),),
                   ),
                 )
               ],
