@@ -37,10 +37,6 @@ class _HomePageState extends State<HomePage> {
     if (_selectedIndex == 1) {
       Navigator.pushNamed(context, MapsPage.id);
     }
-    if (_selectedIndex == 0) {
-      Navigator.pushNamed(context, MapsPage.id);
-    }
-    if (_selectedIndex == 2) {}
   }
 
   @override

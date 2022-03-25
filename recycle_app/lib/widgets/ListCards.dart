@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recycle_app/constants/constants.dart';
 
 class ListCard extends StatefulWidget {
    ListCard({Key? key,required this.imgUrl,required this.color}) : super(key: key);
@@ -20,6 +21,7 @@ class _ListCardState extends State<ListCard> {
           height: 150,
           width: 140,
           decoration: BoxDecoration(
+            boxShadow: kButtonShadows,
               color: widget.color, borderRadius: BorderRadius.circular(20)),
           child: Padding(
             padding: const EdgeInsets.all(25.0),
