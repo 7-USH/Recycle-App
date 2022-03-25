@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
     });
 
     if (_selectedIndex == 1) {
-      print("gandu");
+      print("page 1");
     }
     if (_selectedIndex == 0) {
       print("hello");
