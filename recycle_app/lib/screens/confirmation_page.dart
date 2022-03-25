@@ -49,6 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           AnimatedTextKit(
+                            pause: const Duration(milliseconds: 0),
                             repeatForever: true,
                             animatedTexts: [
                               RotateAnimatedText('cycle'),
