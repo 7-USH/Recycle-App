@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:recycle_app/constants/constants.dart';
+import 'package:recycle_app/screens/MapsPage.dart';
 import 'package:recycle_app/service/location.dart';
+import 'package:recycle_app/widgets/card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -30,6 +32,14 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _selectedIndex = index;
     });
+
+    if (_selectedIndex == 1) {
+      Navigator.pushNamed(context, MapsPage.id);
+    }
+    if (_selectedIndex == 0) {
+      Navigator.pushNamed(context, MapsPage.id);
+    }
+    if (_selectedIndex == 2) {}
   }
 
   @override
@@ -48,10 +58,9 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: scaffoldColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          
-        },
+        onPressed: () {},
         child: FaIcon(
+          // ignore: deprecated_member_use
           FontAwesomeIcons.add,
           color: scaffoldColor,
           size: 35,
@@ -59,7 +68,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white,
         hoverColor: Colors.blue,
         focusColor: Colors.red,
-        elevation: 2,
+        elevation: 4,
       ),
       body: Center(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -99,6 +108,7 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           ),
+          DetailCard()
         ]),
       ),
       bottomNavigationBar: BottomNavigationBar(

@@ -119,6 +119,7 @@ class _VerificationPageState extends State<VerificationPage> {
                       press = !press;
                     });
                   });
+                  
                   (pin) async {
                     try {
                       await FirebaseAuth.instance
