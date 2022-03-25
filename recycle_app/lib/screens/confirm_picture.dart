@@ -57,15 +57,22 @@ class ConfirmPicture extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 32.0),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, Formscreen.id);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return Formscreen(ImageURL: "");
+                              },
+                            ),
+                          );
                         },
                         child: Container(
                           width: size.width / 1.2,
                           height: size.height / 13,
                           decoration: BoxDecoration(
                               gradient: const LinearGradient(colors: [
-                                 Color(0xff00548e),
-                                 Color(0xff009297)
+                                Color(0xff00548e),
+                                Color(0xff009297)
                               ]),
                               borderRadius: BorderRadius.circular(20),
                               boxShadow: kButtonShadows),
@@ -73,10 +80,11 @@ class ConfirmPicture extends StatelessWidget {
                             child: Text(
                               "Confirm Picture",
                               style: TextStyle(
-                                  fontFamily: 'Poppins',
-                                  fontSize: 22,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500),
+                                fontFamily: 'Poppins',
+                                fontSize: 22,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                         ),
