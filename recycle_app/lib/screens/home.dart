@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:recycle_app/constants/constants.dart';
 import 'package:recycle_app/screens/MapsPage.dart';
+import 'package:recycle_app/screens/category_page.dart';
 import 'package:recycle_app/screens/photo_page.dart';
 import 'package:recycle_app/service/location.dart';
 import 'package:recycle_app/widgets/ListCards.dart';
@@ -138,7 +139,14 @@ class _HomePageState extends State<HomePage> {
             scrollDirection: Axis.horizontal,
             children: [
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CategoryPage(),
+                    ),
+                  );
+                },
                 child: ListCard(
                     imgUrl: "assets/images/bottle.png",
                     color: Colors.grey.withOpacity(0.7)),
