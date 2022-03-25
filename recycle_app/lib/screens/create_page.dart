@@ -55,7 +55,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
             ),
             Text(
               "Pick a username and add your phone number, we'll send you a \nverification code so we know you're real",
-              style: poppinFonts(Colors.white, FontWeight.normal, 12),
+              style: poppinFonts(Colors.white, FontWeight.normal, size.height/90),
               textAlign: TextAlign.center,
             ),
             SizedBox(

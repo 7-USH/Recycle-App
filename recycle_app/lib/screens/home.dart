@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_const
+// ignore_for_file: unnecessary_const, prefer_const_constructors, unnecessary_new
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,9 +30,12 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  final TextEditingController _controller = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: scaffoldColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
@@ -48,14 +51,37 @@ class _HomePageState extends State<HomePage> {
         elevation: 2,
       ),
       body: Center(
-        child: Column(children: [
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+          SizedBox(height: 50,),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                    //TODO
+                ),
+                Text("200 points",style: poppinFonts(Colors.white, FontWeight.normal, 15),)
+              ],
+            ),
+          ),
           SizedBox(
-            height: 90,
+            height: 12,
           ),
           Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(10.0),
             child: CupertinoSearchTextField(
-              borderRadius: BorderRadius.circular(10),
+              controller: _controller,
+              placeholder: "Search Recycling Facilities",
+              placeholderStyle: poppinFonts(Colors.grey, FontWeight.normal, 15),
+              borderRadius: BorderRadius.circular(20),
+              itemSize: 50,
+              onChanged: (value) {
+                //TODO
+              },
             ),
           ),
         ]),
@@ -67,8 +93,9 @@ class _HomePageState extends State<HomePage> {
         onTap: _onItemTap,
         unselectedItemColor: Colors.white,
         selectedItemColor: Colors.blue,
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
+        backgroundColor: scaffoldColor,
+
+        elevation: 2.0,
         // ignore: prefer_const_literals_to_create_immutables
         items: [
           const BottomNavigationBarItem(
