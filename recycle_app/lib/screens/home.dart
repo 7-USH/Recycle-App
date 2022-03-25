@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:recycle_app/constants/constants.dart';
 import 'package:recycle_app/screens/MapsPage.dart';
+import 'package:recycle_app/screens/category_page.dart';
+import 'package:recycle_app/screens/photo_page.dart';
 import 'package:recycle_app/service/location.dart';
+import 'package:recycle_app/widgets/ListCards.dart';
 import 'package:recycle_app/widgets/card.dart';
 
 class HomePage extends StatefulWidget {
@@ -34,32 +37,50 @@ class _HomePageState extends State<HomePage> {
     });
 
     if (_selectedIndex == 1) {
-      Navigator.pushNamed(context, MapsPage.id);
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return MapsPage(souLat: latitude, souLon: longitude);
+      }));
     }
-    if (_selectedIndex == 0) {
-      Navigator.pushNamed(context, MapsPage.id);
-    }
-    if (_selectedIndex == 2) {}
+  }
+
+  late double latitude = 0;
+  late double longitude = 0;
+
+  void getLocation() async {
+    MyLocation location = MyLocation();
+    await location.getCurrentLocation();
+    latitude = await location.getLatitude();
+    print(latitude);
+    longitude = await location.getLongitude();
+    print(longitude);
+    setState(() {});
   }
   
 
   @override
   void initState() {
+<<<<<<< HEAD
     
     getcurrentlocation();
     super.initState();
+=======
+    getLocation();
+>>>>>>> main
   }
 
   final TextEditingController _controller = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: scaffoldColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, PhotoPage.id);
+        },
         child: FaIcon(
           // ignore: deprecated_member_use
           FontAwesomeIcons.add,
@@ -71,47 +92,93 @@ class _HomePageState extends State<HomePage> {
         focusColor: Colors.red,
         elevation: 4,
       ),
-      body: Center(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          SizedBox(
-            height: 50,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  //TODO
-                  radius: 30,
+      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        SizedBox(
+          height: 50,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20)),
+                child: Icon(
+                  Icons.person,
+                  size: 25,
+                  color: scaffoldColor,
                 ),
-                Text(
-                  "200 points",
-                  style: poppinFonts(Colors.white, FontWeight.normal, 15),
-                )
-              ],
-            ),
+              ),
+              Text(
+                "200 points",
+                style: poppinFonts(Colors.white, FontWeight.normal, 15),
+              )
+            ],
           ),
-          SizedBox(
-            height: 12,
+        ),
+        SizedBox(
+          height: 12,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: CupertinoSearchTextField(
+            controller: _controller,
+            placeholder: "Search Recycling Facilities",
+            placeholderStyle: poppinFonts(Colors.grey, FontWeight.normal, 15),
+            borderRadius: BorderRadius.circular(20),
+            itemSize: 50,
+            onChanged: (value) {
+              //TODO
+            },
           ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: CupertinoSearchTextField(
-              controller: _controller,
-              placeholder: "Search Recycling Facilities",
-              placeholderStyle: poppinFonts(Colors.grey, FontWeight.normal, 15),
-              borderRadius: BorderRadius.circular(20),
-              itemSize: 50,
-              onChanged: (value) {
-                //TODO
-              },
-            ),
+        ),
+        DetailCard(),
+        Container(
+          width: size.width,
+          height: size.height / 5,
+          child: ListView(
+            physics: BouncingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CategoryPage(),
+                    ),
+                  );
+                },
+                child: ListCard(
+                    imgUrl: "assets/images/bottle.png",
+                    color: Colors.white10),
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: ListCard(
+                    imgUrl: "assets/images/documents.png",
+                    color: Colors.white10),
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: ListCard(
+                    imgUrl: "assets/images/electronic-devices.png",
+                    color: Colors.white10)),
+              
+              GestureDetector(
+                onTap: () {},
+                child: ListCard(
+                    imgUrl: "assets/images/chemicals.png", color: Colors.white10),
+              ),
+            ],
           ),
-          DetailCard()
-        ]),
-      ),
+        )
+      ]),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         iconSize: 40,
