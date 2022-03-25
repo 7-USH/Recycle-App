@@ -16,7 +16,7 @@ class _MapsPageState extends State<MapsPage> {
 
   void setCustomMarker() async {
     mapMarker = await BitmapDescriptor.fromAssetImage(
-        const ImageConfiguration(), 'assets/images/mapMarker_ccexpresg.png');
+        const ImageConfiguration(), "assets/images/map_marker.jpg");
   }
 
   @override
