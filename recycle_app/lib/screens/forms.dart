@@ -59,6 +59,7 @@ class _FormscreenState extends State<Formscreen> {
       "latitude": latitude,
       "longitude": longitude,
       "image": widget.ImageURL,
+      "weight":_weight.text,
     };
     FirebaseFirestore.instance
         .collection(valueChoose!)

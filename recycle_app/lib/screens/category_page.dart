@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:recycle_app/constants/constants.dart';
 
 class CategoryPage extends StatefulWidget {
-  
-
   String str;
   CategoryPage({
     Key? key,
@@ -51,12 +49,8 @@ class _CategoryPageState extends State<CategoryPage> {
             Navigator.pop(context);
           },
         ),
-        title: const Text(
-          "Glass Item Records",
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
+        title: Text("Glass Item Records",
+            style: poppinFonts(Colors.white, FontWeight.w700, 20)),
       ),
       backgroundColor: scaffoldColor,
       body: Padding(
@@ -70,42 +64,40 @@ class _CategoryPageState extends State<CategoryPage> {
                 height: 150,
                 width: size.width,
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(20),
-                ),
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: kButtonShadows),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            items[index]["Description"],
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "By ${items[index]["username"]}",
+                              style: poppinFonts(
+                                  scaffoldColor, FontWeight.bold, 15),
                             ),
-                          ),
-                          // Text(
-                          //   "Weight: ${items[index]["Weight"]}",
-                          //   style: const TextStyle(
-                          //     color: Colors.white,
-                          //     fontSize: 15,
-                          //   ),
-                          // ),
-                          Text(
-                            "Username: ${items[index]["username"]}",
-                            style:
-                                poppinFonts(Colors.white, FontWeight.bold, 15),
-                          ),
-                        ],
+                            Text("Description :" + items[index]["Description"],
+                                style: poppinFonts(
+                                    Colors.white, FontWeight.normal, 9)),
+                          ],
+                        ),
                       ),
-                      Image.network(
-                        items[index]["image"],
-                        fit: BoxFit.scaleDown,
+                      Container(
+                        height: 200,
+                        width: 100,
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Image.network(
+                          items[index]["image"],
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ],
                   ),
