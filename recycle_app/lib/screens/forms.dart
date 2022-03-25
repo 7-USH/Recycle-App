@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_new, prefer_final_fields, unused_field
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:recycle_app/constants/constants.dart';
@@ -16,6 +18,7 @@ class _FormscreenState extends State<Formscreen> {
   TextEditingController _idController3 = new TextEditingController();
   TextEditingController _noController = new TextEditingController();
   TextEditingController _idController4 = new TextEditingController();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +28,7 @@ class _FormscreenState extends State<Formscreen> {
         shadowColor: Colors.transparent,
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        title: Text(
+        title: const Text(
           "Details of Item",
           style: TextStyle(
             fontSize: 20,
@@ -45,7 +48,7 @@ class _FormscreenState extends State<Formscreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Image.asset(
@@ -59,7 +62,7 @@ class _FormscreenState extends State<Formscreen> {
                   child: Form(
                       child: Column(
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.all(25)),
+                      const Padding(padding: EdgeInsets.all(25)),
                       TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -91,7 +94,7 @@ class _FormscreenState extends State<Formscreen> {
                           //TOD0: login page
                         },
                       ),
-                      Padding(padding: EdgeInsets.all(25)),
+                      const Padding(padding: EdgeInsets.all(25)),
                       TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -123,7 +126,7 @@ class _FormscreenState extends State<Formscreen> {
                           //TOD0: login page
                         },
                       ),
-                      Padding(padding: EdgeInsets.all(25)),
+                      const Padding(padding: EdgeInsets.all(25)),
                       TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -155,7 +158,7 @@ class _FormscreenState extends State<Formscreen> {
                           //TOD0: login page
                         },
                       ),
-                      Padding(padding: EdgeInsets.all(25)),
+                      const Padding(padding: EdgeInsets.all(25)),
                       TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -167,7 +170,7 @@ class _FormscreenState extends State<Formscreen> {
                         keyboardType: TextInputType.multiline,
                         style: poppinFonts(Colors.white, FontWeight.normal, 18),
                         decoration: InputDecoration(
-                          hintText: "Decription of the material ",
+                          hintText: "Decription of the material",
                           hintStyle:
                               poppinFonts(Colors.white, FontWeight.normal, 15),
                           enabledBorder: OutlineInputBorder(
@@ -186,10 +189,12 @@ class _FormscreenState extends State<Formscreen> {
                           //TOD0: login page
                         },
                       ),
-                      Padding(padding: EdgeInsets.all(30)),
+                      const Padding(padding: EdgeInsets.all(30)),
                       ElevatedButton(
-                        onPressed: () async {},
-                        child: Text(
+                        onPressed: () async {
+                          
+                        },
+                        child: const Text(
                           "Submit",
                           style: TextStyle(
                             fontSize: 25,
@@ -200,7 +205,7 @@ class _FormscreenState extends State<Formscreen> {
                         ),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.white,
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 50, vertical: 10),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25),
