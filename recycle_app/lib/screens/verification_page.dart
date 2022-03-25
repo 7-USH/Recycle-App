@@ -4,6 +4,7 @@ import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:recycle_app/constants/constants.dart';
+import 'package:recycle_app/screens/home.dart';
 
 class VerificationPage extends StatefulWidget {
   const VerificationPage({Key? key}) : super(key: key);
@@ -19,7 +20,6 @@ class _VerificationPageState extends State<VerificationPage> {
   Color buttonColor = const Color(0xff01661c);
   final TextEditingController _controller = TextEditingController();
   bool isPhone = false;
-
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +104,8 @@ class _VerificationPageState extends State<VerificationPage> {
                       press = !press;
                     });
                   });
+
+                  Navigator.pushNamed(context, HomePage.id);
                 },
                 child: Container(
                   width: size.width / 1.1,
@@ -130,7 +132,7 @@ class _VerificationPageState extends State<VerificationPage> {
                   ),
                 ),
               ),
-                SizedBox(
+              SizedBox(
                 height: size.height / 35,
               ),
               Column(
@@ -140,26 +142,23 @@ class _VerificationPageState extends State<VerificationPage> {
                     "Didn't you receive any code ?",
                     style: poppinFonts(Colors.white, FontWeight.normal, 15),
                   ),
-                  TextButton(onPressed: (){
-                    
-                    //TODO
-
-                  }, child:  Text(
+                  TextButton(
+                    onPressed: () {
+                      //TODO
+                    },
+                    child: Text(
                       "Resend Code",
                       style: poppinFonts(Colors.white, FontWeight.bold, 15),
                     ),
                   )
                 ],
               )
-              
-
             ],
           ),
         ),
       ),
     );
   }
-
 
   Widget _textFieldOTP({required bool first, last}) {
     return Container(
@@ -186,7 +185,8 @@ class _VerificationPageState extends State<VerificationPage> {
             decoration: InputDecoration(
               counter: const Offstage(),
               enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 2, color: Colors.grey.withOpacity(0.2)),
+                  borderSide:
+                      BorderSide(width: 2, color: Colors.grey.withOpacity(0.2)),
                   borderRadius: BorderRadius.circular(12)),
               focusedBorder: OutlineInputBorder(
                   borderSide: const BorderSide(width: 2, color: Colors.white),
@@ -197,7 +197,4 @@ class _VerificationPageState extends State<VerificationPage> {
       ),
     );
   }
-
 }
-
-

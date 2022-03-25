@@ -39,6 +39,7 @@ class _HomePageState extends State<HomePage> {
         focusColor: Colors.red,
         elevation: 2,
       ),
+      resizeToAvoidBottomInset: false,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         iconSize: 40,     
@@ -63,9 +64,7 @@ class _HomePageState extends State<HomePage> {
               label: '', 
               ),          
         ],
-      ),
-
-      
+      ),      
     );
   }
 }
