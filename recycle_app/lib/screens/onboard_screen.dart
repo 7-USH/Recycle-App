@@ -47,7 +47,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
             ),
             Text(
               "Sort trash with other users\nand help save the planet for posterity",
-              style: poppinFonts(Colors.white, FontWeight.normal, 19),
+              style: poppinFonts(Colors.white, FontWeight.normal, size.height/50),
             ),
             Center(
               child: GestureDetector(

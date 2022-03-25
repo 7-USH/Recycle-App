@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         LoginPage.id :(context) => LoginPage(),
         LoginPhone.id : (context) => const LoginPhone(),
         CreateAccountPage.id : (context) => CreateAccountPage(),
-        VerificationPage.id : (context) =>const  VerificationPage(),
+        VerificationPage.id : (context) => const VerificationPage(phone: '',),
         HomePage.id:(context)=>const HomePage(),
       }
     );
