@@ -40,6 +40,7 @@ dependencies:
   animated_text_kit: ^4.2.1
   image_picker: ^0.8.4+11
   camera:
+  image_crop: ^0.4.0
 
 dev_dependencies:
   flutter_test:

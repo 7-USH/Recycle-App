@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:recycle_app/constants/constants.dart';
 import 'package:recycle_app/screens/camera_page.dart';
+import 'package:recycle_app/screens/item_details..dart';
 
 class PhotoPage extends StatefulWidget {
   PhotoPage({Key? key}) : super(key: key);
@@ -58,16 +59,7 @@ class _PhotoPageState extends State<PhotoPage> {
                           press = !press;
                         });
                       });
-                      final ImagePicker _picker = ImagePicker();
-                      final XFile? photo = await _picker.pickImage(
-                        source: ImageSource.camera,
-                      );
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CameraPage(photo: photo),
-                        ),
-                      );
+                      Navigator.pushNamed(context, CameraPage.id);
                     },
                     child: Container(
                       width: size.width / 1.1,
