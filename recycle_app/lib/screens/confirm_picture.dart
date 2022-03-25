@@ -61,7 +61,7 @@ class ConfirmPicture extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return Formscreen(ImageURL: "");
+                                return Formscreen();
                               },
                             ),
                           );

@@ -12,19 +12,20 @@ class RecycleItemPage extends StatefulWidget {
 class _RecycleItemPageState extends State<RecycleItemPage> {
   @override
   Widget build(BuildContext context) {
-    return Hero(tag: "1", child: 
-    Scaffold(
-      backgroundColor: scaffoldColor,
-      appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          onPressed: (){
-
-          },
-          icon: const Icon(Icons.arrow_back_ios),
-        ),
-      ),
-    ));
+    return Hero(
+        tag: "1",
+        child: Scaffold(
+          backgroundColor: scaffoldColor,
+          appBar: AppBar(
+            elevation: 0.0,
+            backgroundColor: Colors.transparent,
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.arrow_back_ios),
+            ),
+          ),
+        ));
   }
 }

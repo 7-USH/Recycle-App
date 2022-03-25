@@ -28,7 +28,7 @@ class _DetailCardState extends State<DetailCard> {
             height: size.height / 3,
             width: size.width / 1.1,
             decoration: BoxDecoration(
-              color: Colors.blueAccent.withOpacity(0.3),
+              color: Colors.white10,
               borderRadius: BorderRadius.circular(20),
               boxShadow: kButtonShadows,
             ),
@@ -44,7 +44,7 @@ class _DetailCardState extends State<DetailCard> {
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Text("Earn points for \ndiscarded \ntrash",textAlign: TextAlign.start,
-                    style: poppinFonts(scaffoldColor, FontWeight.bold, 25),),
+                    style: poppinFonts(Colors.white, FontWeight.bold, 25),),
                   ),
                 )
               ],

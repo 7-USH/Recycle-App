@@ -149,24 +149,24 @@ class _HomePageState extends State<HomePage> {
                 },
                 child: ListCard(
                     imgUrl: "assets/images/bottle.png",
-                    color: Colors.grey.withOpacity(0.7)),
+                    color: Colors.white10),
               ),
               GestureDetector(
                 onTap: () {},
                 child: ListCard(
                     imgUrl: "assets/images/documents.png",
-                    color: Colors.red.withOpacity(0.7)),
+                    color: Colors.white10),
               ),
               GestureDetector(
                 onTap: () {},
                 child: ListCard(
                     imgUrl: "assets/images/electronic-devices.png",
-                    color: Colors.amber),
-              ),
+                    color: Colors.white10)),
+              
               GestureDetector(
                 onTap: () {},
                 child: ListCard(
-                    imgUrl: "assets/images/chemicals.png", color: Colors.white),
+                    imgUrl: "assets/images/chemicals.png", color: Colors.white10),
               ),
             ],
           ),
