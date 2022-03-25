@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recycle_app/screens/Points_page.dart';
 import 'package:recycle_app/screens/confirmation_page.dart';
 import 'package:recycle_app/screens/create_page.dart';
 import 'package:recycle_app/screens/login_page.dart';
@@ -17,12 +18,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const OnBoardScreen(),
+      home: const PointsPage(),
       routes: {
         LoginPage.id :(context) => LoginPage(),
         LoginPhone.id : (context) => const LoginPhone(),
         CreateAccountPage.id : (context) => CreateAccountPage(),
         VerificationPage.id : (context) =>const  VerificationPage(),
+      
       }
     );
   }
