@@ -81,10 +81,15 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CircleAvatar(
-                backgroundImage: AssetImage("assets/images/documents.png"),
-                radius: 30,
-              ),
+             Container(
+               height: 40,
+               width: 40,
+               decoration: BoxDecoration(
+                 color: Colors.white,
+                 borderRadius: BorderRadius.circular(20)
+               ),
+               child: Icon(Icons.person,size: 25,color: scaffoldColor,),
+             ),
               Text(
                 "200 points",
                 style: poppinFonts(Colors.white, FontWeight.normal, 15),

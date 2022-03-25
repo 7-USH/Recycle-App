@@ -35,19 +35,15 @@ class ConfirmPicture extends StatelessWidget {
             Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.transparent,
+                elevation: 0.0,
                 leading: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back_ios_new,
+                    size: 25,
                   ),
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                ),
-                title: Text(
-                  "Scan Trash",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
                 ),
               ),
               backgroundColor: Colors.transparent,
@@ -66,9 +62,9 @@ class ConfirmPicture extends StatelessWidget {
                           width: size.width / 1.2,
                           height: size.height / 13,
                           decoration: BoxDecoration(
-                              gradient: LinearGradient(colors: [
-                                const Color(0xff00548e),
-                                const Color(0xff009297)
+                              gradient: const LinearGradient(colors: [
+                                 Color(0xff00548e),
+                                 Color(0xff009297)
                               ]),
                               borderRadius: BorderRadius.circular(20),
                               boxShadow: kButtonShadows),

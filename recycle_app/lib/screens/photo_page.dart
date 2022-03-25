@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
@@ -35,15 +36,18 @@ class _PhotoPageState extends State<PhotoPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              LottieBuilder.network(
-                "https://assets10.lottiefiles.com/packages/lf20_0zv8teye.json",
+              AvatarGlow(
+                endRadius: 150,
+                child: LottieBuilder.network(
+                  "https://assets10.lottiefiles.com/packages/lf20_0zv8teye.json",
+                ),
               ),
               Text(
                 "Upload Item Image",
                 textAlign: TextAlign.center,
                 style: poppinFonts(
                   Colors.white,
-                  FontWeight.bold,
+                  FontWeight.w500,
                   30,
                 ),
               ),
