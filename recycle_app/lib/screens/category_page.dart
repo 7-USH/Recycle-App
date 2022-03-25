@@ -15,21 +15,22 @@ class CategoryPage extends StatefulWidget {
 }
 
 class _CategoryPageState extends State<CategoryPage> {
-  final CollectionReference ItemList =
-      FirebaseFirestore.instance.collection("Glass");
-
   List items = [];
-  Future fetchItemList() async {
-    await ItemList.get().then((querySnapshot) {
-      for (var element in querySnapshot.docs) {
-        items.add(element.data());
-      }
-    });
-    setState(() {});
-  }
-
+  late final CollectionReference ItemList;
   @override
   void initState() {
+    final CollectionReference ItemList =
+        FirebaseFirestore.instance.collection(widget.str);
+
+    Future fetchItemList() async {
+      await ItemList.get().then((querySnapshot) {
+        for (var element in querySnapshot.docs) {
+          items.add(element.data());
+        }
+      });
+      setState(() {});
+    }
+
     super.initState();
     fetchItemList();
   }
@@ -49,8 +50,12 @@ class _CategoryPageState extends State<CategoryPage> {
             Navigator.pop(context);
           },
         ),
-        title: Text("Glass Item Records",
-            style: poppinFonts(Colors.white, FontWeight.w700, 20)),
+        title: Text(
+          "${widget.str} Item Records",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
       ),
       backgroundColor: scaffoldColor,
       body: Padding(

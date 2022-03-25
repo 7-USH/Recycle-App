@@ -152,19 +152,40 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white10),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CategoryPage(str: "Paper"),
+                    ),
+                  );
+                },
                 child: ListCard(
                     imgUrl: "assets/images/documents.png",
                     color: Colors.white10),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CategoryPage(str: "Electronics"),
+                      ),
+                    );
+                  },
                 child: ListCard(
                     imgUrl: "assets/images/electronic-devices.png",
                     color: Colors.white10)),
               
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CategoryPage(str: "Chemicals"),
+                    ),
+                  );
+                },
                 child: ListCard(
                     imgUrl: "assets/images/chemicals.png", color: Colors.white10),
               ),
