@@ -16,7 +16,7 @@ class _MapsPageState extends State<MapsPage> {
 
   void setCustomMarker() async {
     mapMarker = await BitmapDescriptor.fromAssetImage(
-        const ImageConfiguration(), 'assets/images/mapMarker_ccexpresg.png');
+        const ImageConfiguration(), "assets/images/map_marker.jpg");
   }
 
   @override
@@ -32,10 +32,14 @@ class _MapsPageState extends State<MapsPage> {
         Marker(
           markerId: const MarkerId('id-1'),
           position: const LatLng(37.42796133580664, -122.085749655962),
-          infoWindow: const InfoWindow(
-            title: 'Temp',
-            snippet: 'Nice Place',
-          ),
+          infoWindow: InfoWindow(
+              title: 'Temp',
+              snippet: 'Nice Place',
+              onTap: () {
+                setState(() {
+                  isVisibile = !isVisibile;
+                });
+              }),
           icon: mapMarker,
         ),
       );

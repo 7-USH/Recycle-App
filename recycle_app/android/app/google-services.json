@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "701563061170-h6rui387fsu680lcputiba7inff386j4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.recycle_app",
+            "certificate_hash": "bac462ed8167d1d033fe214a2e0100fb2a6f7a5d"
+          }
+        },
+        {
           "client_id": "701563061170-24lu1b169ieakodaj07dt2k1s5bal1tv.apps.googleusercontent.com",
           "client_type": 3
         }
