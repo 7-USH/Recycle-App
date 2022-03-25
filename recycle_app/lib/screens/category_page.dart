@@ -77,36 +77,29 @@ class _CategoryPageState extends State<CategoryPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            items[index]["description"],
+                            items[index]["Description"],
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 20,
                             ),
                           ),
-                          Text(
-                            "Weight: ${items[index]["Weight"]}",
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                            ),
-                          ),
+                          // Text(
+                          //   "Weight: ${items[index]["Weight"]}",
+                          //   style: const TextStyle(
+                          //     color: Colors.white,
+                          //     fontSize: 15,
+                          //   ),
+                          // ),
                           Text(
                             "Username: ${items[index]["username"]}",
                             style:
                                 poppinFonts(Colors.white, FontWeight.bold, 15),
                           ),
-                          Text(
-                            "Location: ${items[index]["Location"].latitude}°N, ${items[index]["Location"].longitude}°S",
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                            ),
-                          ),
                         ],
                       ),
-                      SizedBox(
-                        height: 100,
-                        child: Image.network(items[index]["image"]),
+                      Image.network(
+                        items[index]["image"],
+                        fit: BoxFit.scaleDown,
                       ),
                     ],
                   ),

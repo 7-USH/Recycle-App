@@ -1,9 +1,14 @@
 // ignore_for_file: unnecessary_new, prefer_final_fields, unused_field
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:recycle_app/constants/constants.dart';
+
+import '../service/location.dart';
 
 class Formscreen extends StatefulWidget {
   static String id = "form";
@@ -20,22 +25,57 @@ class Formscreen extends StatefulWidget {
 }
 
 class _FormscreenState extends State<Formscreen> {
-  TextEditingController _idController1 = new TextEditingController();
-  TextEditingController _idController2 = new TextEditingController();
-  TextEditingController _idController3 = new TextEditingController();
-  TextEditingController _noController = new TextEditingController();
-  TextEditingController _idController4 = new TextEditingController();
+  TextEditingController _userName = new TextEditingController();
+  TextEditingController _weight = new TextEditingController();
+  TextEditingController _description = new TextEditingController();
+  String uploadCode = DateTime.now().hashCode.toString();
+
   bool press = false;
   double _slidervalue = 20;
+  late Map<String, dynamic> userData;
+  late LatLng myLocation;
 
-  List list = ["Glass", "Paper/Plastic", "Electronics", "Chemical"];
-   String? valueChoose;
+  List list = ["Glass", "Paper", "Plastic", "Electronics", "Chemicals"];
+  String? valueChoose;
+  late double latitude = 0;
+  late double longitude = 0;
 
+  getLocation() async {
+    MyLocation location = MyLocation();
+    await location.getCurrentLocation();
+    latitude = await location.getLatitude();
+    myLocation = LatLng(latitude, longitude);
+    print(latitude);
+    longitude = await location.getLongitude();
+    print(longitude);
+    setState(() {});
+    return myLocation;
+  }
+
+  void addData() {
+    userData = {
+      "username": _userName.text,
+      "Description": _description.text,
+      "latitude": latitude,
+      "longitude": longitude,
+      "image": widget.ImageURL,
+    };
+    FirebaseFirestore.instance
+        .collection(valueChoose!)
+        .doc(uploadCode)
+        .set(userData);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getLocation();
+  }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-   
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: scaffoldColor,
@@ -43,8 +83,14 @@ class _FormscreenState extends State<Formscreen> {
         shadowColor: Colors.transparent,
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        title: Text("Add Details of Item",
-            style: poppinFonts(Colors.white, FontWeight.normal, 25)),
+        title: Text(
+          "Add Details of Item",
+          style: poppinFonts(
+            Colors.white,
+            FontWeight.normal,
+            25,
+          ),
+        ),
         leading: IconButton(
           splashRadius: 20,
           icon: const Icon(Icons.arrow_back_ios),
@@ -74,26 +120,31 @@ class _FormscreenState extends State<Formscreen> {
                           }
                           return null;
                         },
-                        controller: _idController1,
+                        controller: _userName,
                         keyboardType: TextInputType.name,
-                        style: poppinFonts(Colors.white, FontWeight.normal, 18),
+                        style: poppinFonts(
+                          Colors.white,
+                          FontWeight.normal,
+                          18,
+                        ),
                         decoration: InputDecoration(
-                            hintText: "Name",
-                            hintStyle: poppinFonts(
-                                Colors.white, FontWeight.normal, 15),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.circular(20)),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            prefixIcon: const Icon(
-                              Icons.person,
-                              color: Colors.white,
-                              size: 30,
-                            )),
+                          hintText: "Name",
+                          hintStyle:
+                              poppinFonts(Colors.white, FontWeight.normal, 15),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          prefixIcon: const Icon(
+                            Icons.person,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
                         onChanged: (value) {
                           //TOD0: login page
                         },
@@ -107,23 +158,39 @@ class _FormscreenState extends State<Formscreen> {
                           height: size.height / 10,
                           width: size.width,
                           decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white, width: 1),
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 1,
+                            ),
                             borderRadius: BorderRadius.circular(25),
                           ),
                           child: DropdownButton(
                             hint: Padding(
                               padding: const EdgeInsets.all(22.0),
-                              child: Text("Select Material Type",
+                              child: Text(
+                                "Select Material Type",
                                 style: poppinFonts(
-                                    Colors.white, FontWeight.normal, 15),
+                                  Colors.white,
+                                  FontWeight.normal,
+                                  15,
+                                ),
                               ),
                             ),
-                            disabledHint: Text("Select Material Type",style: poppinFonts(
-                                  Colors.white, FontWeight.normal, 15),) ,
-                            itemHeight:100,
+                            disabledHint: Text(
+                              "Select Material Type",
+                              style: poppinFonts(
+                                Colors.white,
+                                FontWeight.normal,
+                                15,
+                              ),
+                            ),
+                            itemHeight: 100,
                             alignment: AlignmentDirectional.center,
                             style: poppinFonts(
-                                Colors.white, FontWeight.normal, 15),
+                              Colors.white,
+                              FontWeight.normal,
+                              15,
+                            ),
                             dropdownColor: scaffoldColor,
                             iconSize: 30,
                             underline: const SizedBox(),
@@ -135,16 +202,23 @@ class _FormscreenState extends State<Formscreen> {
                             ),
                             value: valueChoose,
                             items: list.map((e) {
-                              return DropdownMenuItem(value: e, child: Container(
-                                width: 140,
-                                height: 20,
-                                child: Center(
-                                  child: Text(e,textAlign: TextAlign.center,))));
+                              return DropdownMenuItem(
+                                value: e,
+                                child: SizedBox(
+                                  width: 140,
+                                  height: 20,
+                                  child: Center(
+                                    child: Text(
+                                      e,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                              );
                             }).toList(),
                             onChanged: (newValue) {
                               valueChoose = newValue as String;
-                              setState(() { 
-                              });
+                              setState(() {});
                             },
                           ),
                         ),
@@ -159,26 +233,27 @@ class _FormscreenState extends State<Formscreen> {
                           }
                           return null;
                         },
-                        controller: _idController3,
+                        controller: _weight,
                         keyboardType: TextInputType.number,
                         style: poppinFonts(Colors.white, FontWeight.normal, 18),
                         decoration: InputDecoration(
-                            hintText: "Weight in kg's ",
-                            hintStyle: poppinFonts(
-                                Colors.white, FontWeight.normal, 15),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.circular(20)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.circular(20)),
-                            prefixIcon: const Icon(
-                              Icons.shopping_bag,
-                              color: Colors.white,
-                              size: 30,
-                            )),
+                          hintText: "Weight in kg's ",
+                          hintStyle:
+                              poppinFonts(Colors.white, FontWeight.normal, 15),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          prefixIcon: const Icon(
+                            Icons.shopping_bag,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
                         onChanged: (value) {
                           //TOD0: login page
                         },
@@ -194,7 +269,7 @@ class _FormscreenState extends State<Formscreen> {
                           }
                           return null;
                         },
-                        controller: _idController4,
+                        controller: _description,
                         keyboardType: TextInputType.multiline,
                         style: poppinFonts(Colors.white, FontWeight.normal, 18),
                         decoration: InputDecoration(
@@ -230,8 +305,7 @@ class _FormscreenState extends State<Formscreen> {
                               press = !press;
                             });
                           });
-
-                          //TODO:
+                          addData();
                         },
                         child: Container(
                           width: size.width / 1.1,
@@ -248,7 +322,7 @@ class _FormscreenState extends State<Formscreen> {
                               boxShadow: kButtonShadows),
                           child: const Center(
                             child: Text(
-                              "Send",
+                              "Submit",
                               style: TextStyle(
                                   fontFamily: 'Poppins',
                                   fontSize: 22,
