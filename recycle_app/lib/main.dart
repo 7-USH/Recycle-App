@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:recycle_app/screens/MapsPage.dart';
 import 'package:recycle_app/screens/confirmation_page.dart';
 import 'package:recycle_app/screens/create_page.dart';
 import 'package:recycle_app/screens/home.dart';
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
           VerificationPage.id: (context) => const VerificationPage(
                 phone: '',
               ),
-              HomePage.id : (context) => const HomePage()
+          HomePage.id: (context) => const HomePage(),
+          MapsPage.id: (context) => const MapsPage()
         });
   }
 }

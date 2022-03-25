@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:recycle_app/constants/constants.dart';
+import 'package:recycle_app/screens/MapsPage.dart';
 import 'package:recycle_app/service/location.dart';
 import 'package:recycle_app/widgets/ListCards.dart';
 import 'package:recycle_app/widgets/card.dart';
@@ -34,11 +35,12 @@ class _HomePageState extends State<HomePage> {
     });
 
     if (_selectedIndex == 1) {
-      print("page 1");
+      Navigator.pushNamed(context, MapsPage.id);
     }
     if (_selectedIndex == 0) {
-      print("hello");
+      Navigator.pushNamed(context, MapsPage.id);
     }
+    if (_selectedIndex == 2) {}
   }
 
   @override
@@ -60,6 +62,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: FaIcon(
+          // ignore: deprecated_member_use
           FontAwesomeIcons.add,
           color: scaffoldColor,
           size: 35,
