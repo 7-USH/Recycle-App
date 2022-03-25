@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:recycle_app/constants/constants.dart';
+
 class HomePage extends StatefulWidget {
-  const HomePage({ Key? key }) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
   static String id = "home";
 
   @override
@@ -9,23 +11,37 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int curr=0;
-  final screens =[
-      const Center(child: Text('Home',style: TextStyle(fontSize: 40),),)
-      
-
+  int curr = 0;
+  final screens = [
+    const Center(
+      child: Text(
+        'Home',
+        style: TextStyle(fontSize: 40),
+      ),
+    )
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: scaffoldColor,
-      
+      body: Center(
+        child: Column(children: [
+          SizedBox(
+            height: 90,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: CupertinoSearchTextField(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        ]),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         iconSize: 40,
-      
-        
+
         currentIndex: curr,
-        onTap: (index) =>curr=index,
+        onTap: (index) => curr = index,
         unselectedItemColor: Colors.white,
         selectedItemColor: Colors.blue,
         backgroundColor: Colors.transparent,
@@ -33,32 +49,30 @@ class _HomePageState extends State<HomePage> {
         // ignore: prefer_const_literals_to_create_immutables
         items: [
           const BottomNavigationBarItem(
-
-            
-            icon: Icon(Icons.home,color: Colors.white,),
-            label: 'Home',
+            icon: Icon(
+              Icons.home,
+              color: Colors.white,
             ),
-             const BottomNavigationBarItem(
-              
-              icon: Icon(Icons.add,color: Colors.white,),
-              label: 'Photo',
-              
-              ),
+            label: 'Home',
+          ),
+          const BottomNavigationBarItem(
+            icon: Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+            label: 'Photo',
+          ),
 
-            // ignore: prefer_const_constructors
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.map,color: Colors.white,),
-              label: 'Maps', 
-              
-              
-              
-              ),
-
-          
+          // ignore: prefer_const_constructors
+          BottomNavigationBarItem(
+            icon: const Icon(
+              Icons.map,
+              color: Colors.white,
+            ),
+            label: 'Maps',
+          ),
         ],
       ),
-
-      
     );
   }
 }
