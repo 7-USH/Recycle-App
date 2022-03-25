@@ -22,7 +22,7 @@ List<BoxShadow> kButtonShadows = [
       blurRadius: 8)
 ];
 
-TextStyle poppinFonts(Color color, FontWeight fontWeight, double size, {FontWeight fontWeight}) {
+TextStyle poppinFonts(Color color, FontWeight fontWeight, double size) {
   return GoogleFonts.poppins(
       fontSize: size, color: color, fontWeight: fontWeight);
 }
