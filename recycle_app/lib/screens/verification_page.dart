@@ -120,6 +120,9 @@ class _VerificationPageState extends State<VerificationPage> {
                       press = !press;
                     });
                   });
+
+                   Navigator.pushNamed(context, HomePage.id);
+
                   (pin) async {
                     try {
                       await FirebaseAuth.instance
@@ -130,13 +133,12 @@ class _VerificationPageState extends State<VerificationPage> {
                         ),
                       )
                           .then((value) async {
-                        if (value.user != null) {
-                          print("HOGAYA BC");
-                          Navigator.pushNamed(context, HomePage.id);
-                        }
+                        // if (value.user != null) {
+                        // }
                       });
                     } catch (e) {
-                      print(e.toString());
+                      print("F");
+
                     }
                   };
                 },
