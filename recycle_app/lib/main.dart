@@ -15,18 +15,18 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const OnBoardScreen(),
-      routes: {
-        LoginPage.id :(context) => LoginPage(),
-        LoginPhone.id : (context) => const LoginPhone(),
-        CreateAccountPage.id : (context) => CreateAccountPage(),
-        VerificationPage.id : (context) =>const  VerificationPage(),
-      }
-    );
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: const OnBoardScreen(),
+        routes: {
+          LoginPage.id: (context) => LoginPage(),
+          LoginPhone.id: (context) => const LoginPhone(),
+          CreateAccountPage.id: (context) => CreateAccountPage(),
+          VerificationPage.id: (context) => const VerificationPage(
+                phone: '',
+              ),
+        });
   }
 }

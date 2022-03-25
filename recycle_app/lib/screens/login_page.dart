@@ -85,38 +85,40 @@ class _LoginPhoneState extends State<LoginPhone> {
                   color: scaffoldColor.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Column(children: [
-                  TextFormField(
-                    controller: _controller,
-                    keyboardType: TextInputType.number,
-                    style: poppinFonts(Colors.white, FontWeight.normal, 18),
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(10)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(10)),
-                      prefix: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8),
-                        child: Text('(+91)',
-                            style: poppinFonts(
-                                Colors.white, FontWeight.normal, 15)),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: _controller,
+                      keyboardType: TextInputType.number,
+                      style: poppinFonts(Colors.white, FontWeight.normal, 18),
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.circular(10)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.circular(10)),
+                        prefix: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          child: Text('(+91)',
+                              style: poppinFonts(
+                                  Colors.white, FontWeight.normal, 15)),
+                        ),
+                        suffixIcon: Icon(
+                          Icons.check_circle,
+                          color: isPhone ? Colors.green : scaffoldColor,
+                          size: 32,
+                        ),
                       ),
-                      suffixIcon: Icon(
-                        Icons.check_circle,
-                        color: isPhone ? Colors.green : scaffoldColor,
-                        size: 32,
-                      ),
+                      onChanged: (value) {
+                        isPhone =
+                            this.numberValidator(int.parse(_controller.text));
+                        setState(() {});
+                        //TOD0: login page
+                      },
                     ),
-                    onChanged: (value) {
-                      isPhone =
-                          this.numberValidator(int.parse(_controller.text));
-                      setState(() {});
-                      //TOD0: login page
-                    },
-                  ),
-                ]),
+                  ],
+                ),
               ),
               SizedBox(
                 height: size.height / 30,
@@ -131,29 +133,36 @@ class _LoginPhoneState extends State<LoginPhone> {
                       press = !press;
                     });
                   });
-                  Navigator.pushNamed(context, VerificationPage.id);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => VerificationPage( phone: _controller.text,),
+                    ),
+                  );
                 },
                 child: Container(
                   width: size.width / 1.1,
                   height: size.height / 13,
                   decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          colors: press
-                              ? [Colors.blue, Colors.red]
-                              : [
-                                  const Color(0xff00548e),
-                                  const Color(0xff009297)
-                                ]),
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: kButtonShadows),
+                    gradient: LinearGradient(
+                      colors: press
+                          ? [Colors.blue, Colors.red]
+                          : [
+                              const Color(0xff00548e),
+                              const Color(0xff009297),
+                            ],
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: kButtonShadows,
+                  ),
                   child: const Center(
                     child: Text(
                       "Send",
                       style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 22,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500),
+                        fontFamily: 'Poppins',
+                        fontSize: 22,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ),
