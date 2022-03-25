@@ -2,11 +2,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:recycle_app/constants/constants.dart';
 
 class Formscreen extends StatefulWidget {
-  const Formscreen({Key? key}) : super(key: key);
   static String id = "form";
+
+  String ImageURL;
+  Formscreen({
+    Key? key,
+    required this.ImageURL,
+  }) : super(key: key);
 
   @override
   State<Formscreen> createState() => _FormscreenState();
@@ -18,7 +24,7 @@ class _FormscreenState extends State<Formscreen> {
   TextEditingController _idController3 = new TextEditingController();
   TextEditingController _noController = new TextEditingController();
   TextEditingController _idController4 = new TextEditingController();
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -191,9 +197,7 @@ class _FormscreenState extends State<Formscreen> {
                       ),
                       const Padding(padding: EdgeInsets.all(30)),
                       ElevatedButton(
-                        onPressed: () async {
-                          
-                        },
+                        onPressed: () async {},
                         child: const Text(
                           "Submit",
                           style: TextStyle(
