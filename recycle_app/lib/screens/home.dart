@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:recycle_app/constants/constants.dart';
 import 'package:recycle_app/screens/MapsPage.dart';
+import 'package:recycle_app/screens/photo_page.dart';
 import 'package:recycle_app/service/location.dart';
+import 'package:recycle_app/widgets/ListCards.dart';
 import 'package:recycle_app/widgets/card.dart';
 
 class HomePage extends StatefulWidget {
@@ -36,10 +38,6 @@ class _HomePageState extends State<HomePage> {
     if (_selectedIndex == 1) {
       Navigator.pushNamed(context, MapsPage.id);
     }
-    if (_selectedIndex == 0) {
-      Navigator.pushNamed(context, MapsPage.id);
-    }
-    if (_selectedIndex == 2) {}
   }
 
   @override
@@ -53,12 +51,15 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: scaffoldColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, PhotoPage.id);
+        },
         child: FaIcon(
           // ignore: deprecated_member_use
           FontAwesomeIcons.add,
@@ -70,47 +71,93 @@ class _HomePageState extends State<HomePage> {
         focusColor: Colors.red,
         elevation: 4,
       ),
-      body: Center(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          SizedBox(
-            height: 50,
+      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        SizedBox(
+          height: 50,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                backgroundImage: AssetImage("assets/images/documents.png"),
+                radius: 30,
+              ),
+              Text(
+                "200 points",
+                style: poppinFonts(Colors.white, FontWeight.normal, 15),
+              )
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  //TODO
-                  radius: 30,
-                ),
-                Text(
-                  "200 points",
-                  style: poppinFonts(Colors.white, FontWeight.normal, 15),
-                )
-              ],
-            ),
+        ),
+        SizedBox(
+          height: 12,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: CupertinoSearchTextField(
+            controller: _controller,
+            placeholder: "Search Recycling Facilities",
+            placeholderStyle: poppinFonts(Colors.grey, FontWeight.normal, 15),
+            borderRadius: BorderRadius.circular(20),
+            itemSize: 50,
+            onChanged: (value) {
+              //TODO
+            },
           ),
-          SizedBox(
-            height: 12,
+        ),
+        DetailCard(),
+        Container(
+          width: size.width,
+          height: size.height / 5,
+          child: ListView(
+            physics: BouncingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            children: [
+              GestureDetector(
+                onTap: (){
+
+                    
+
+                },
+                child: ListCard(
+                    imgUrl: "assets/images/bottle.png",
+                    color: Colors.grey.withOpacity(0.7)),
+              ),
+              GestureDetector(
+                onTap: (){
+
+                  
+
+                },
+                child: ListCard(
+                    imgUrl: "assets/images/documents.png", color: Colors.red.withOpacity(0.7)),
+              ),
+              GestureDetector(
+                onTap: (){
+
+
+
+                },
+                child: ListCard(
+                    imgUrl: "assets/images/electronic-devices.png", color: Colors.amber),
+              ),
+                  GestureDetector(
+                onTap: (){
+
+
+
+                    },
+                child: ListCard(
+                    imgUrl: "assets/images/chemicals.png",
+                    color: Colors.white),
+                  ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: CupertinoSearchTextField(
-              controller: _controller,
-              placeholder: "Search Recycling Facilities",
-              placeholderStyle: poppinFonts(Colors.grey, FontWeight.normal, 15),
-              borderRadius: BorderRadius.circular(20),
-              itemSize: 50,
-              onChanged: (value) {
-                //TODO
-              },
-            ),
-          ),
-          DetailCard()
-        ]),
-      ),
+        )
+      ]),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         iconSize: 40,
