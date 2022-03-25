@@ -3,8 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:recycle_app/constants/constants.dart';
+
 class HomePage extends StatefulWidget {
-  const HomePage({ Key? key }) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
   static String id = "home";
 
   @override
@@ -12,12 +13,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex=0;
-  final screens =[
-      const Center(child: Text('Home',style: TextStyle(fontSize: 40),),)
-  ];
-
-    void _onItemTap(int index) {
+  int _selectedIndex = 0;
+ 
+  void _onItemTap(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -29,11 +27,14 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: scaffoldColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
-
+        onPressed: () {
 
         },
-        child: FaIcon(FontAwesomeIcons.add,color: scaffoldColor,size: 35,),
+        child: FaIcon(
+          FontAwesomeIcons.add,
+          color: scaffoldColor,
+          size: 35,
+        ),
         backgroundColor: Colors.white,
         hoverColor: Colors.blue,
         focusColor: Colors.red,
@@ -42,29 +43,32 @@ class _HomePageState extends State<HomePage> {
       resizeToAvoidBottomInset: false,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        iconSize: 40,     
+        iconSize: 40,
         currentIndex: _selectedIndex,
         onTap: _onItemTap,
         unselectedItemColor: Colors.white,
-        selectedItemColor: Colors.blue,
-        backgroundColor: Colors.transparent,
+        selectedItemColor: const Color(0xFFd00657),
+        backgroundColor:scaffoldColor,
         elevation: 0.0,
         // ignore: prefer_const_literals_to_create_immutables
         items: [
-          const BottomNavigationBarItem(      
+          const BottomNavigationBarItem(
             icon: FaIcon(
               FontAwesomeIcons.home,
               color: Colors.white,
               size: 30,
             ),
             label: '',
-            ),    // ignore: prefer_const_constructors
-           const BottomNavigationBarItem(
-              icon: const Icon(Icons.location_on,color: Colors.white,),
-              label: '', 
-              ),          
+          ), // ignore: prefer_const_constructors
+          const BottomNavigationBarItem(
+            icon: const Icon(
+              Icons.location_on,
+              color: Colors.white,
+            ),
+            label: '',
+          ),
         ],
-      ),      
+      ),
     );
   }
 }
