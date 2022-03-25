@@ -3,6 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapsPage extends StatefulWidget {
   const MapsPage({Key? key}) : super(key: key);
+  static String id = "home";
 
   @override
   State<MapsPage> createState() => _MapsPageState();
