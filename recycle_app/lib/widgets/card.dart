@@ -10,6 +10,9 @@ class DetailCard extends StatefulWidget {
 }
 
 class _DetailCardState extends State<DetailCard> {
+  
+
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -41,7 +44,7 @@ class _DetailCardState extends State<DetailCard> {
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Text("Earn points for \ndiscarded \ntrash",textAlign: TextAlign.start,
-                    style: poppinFonts(Colors.black, FontWeight.bold, 25),),
+                    style: poppinFonts(scaffoldColor, FontWeight.bold, 25),),
                   ),
                 )
               ],
