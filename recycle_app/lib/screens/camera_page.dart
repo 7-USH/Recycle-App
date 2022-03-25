@@ -113,15 +113,13 @@ class _CameraPageState extends State<CameraPage> {
                           GestureDetector(
                             onTap: () async {
                               XFile? photo = await controller.takePicture();
-                              if (photo != null) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        ConfirmPicture(photo: photo),
-                                  ),
-                                );
-                              }
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      ConfirmPicture(photo: photo),
+                                ),
+                              );
                             },
                             child: SizedBox(
                               height: size.height / 8,

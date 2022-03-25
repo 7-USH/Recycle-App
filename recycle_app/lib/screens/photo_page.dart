@@ -104,6 +104,14 @@ class _PhotoPageState extends State<PhotoPage> {
                       final XFile? photo = await _picker.pickImage(
                         source: ImageSource.gallery,
                       );
+                      if (photo != null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ConfirmPicture(photo: photo),
+                          ),
+                        );
+                      }
                     },
                     child: Container(
                       width: size.width / 1.1,
