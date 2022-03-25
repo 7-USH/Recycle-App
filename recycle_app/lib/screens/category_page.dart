@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:recycle_app/constants/constants.dart';
 
 class CategoryPage extends StatefulWidget {
-  
-
   String str;
   CategoryPage({
     Key? key,
@@ -17,21 +15,22 @@ class CategoryPage extends StatefulWidget {
 }
 
 class _CategoryPageState extends State<CategoryPage> {
-  final CollectionReference ItemList =
-      FirebaseFirestore.instance.collection("Glass");
-
   List items = [];
-  Future fetchItemList() async {
-    await ItemList.get().then((querySnapshot) {
-      for (var element in querySnapshot.docs) {
-        items.add(element.data());
-      }
-    });
-    setState(() {});
-  }
-
+  late final CollectionReference ItemList;
   @override
   void initState() {
+    final CollectionReference ItemList =
+        FirebaseFirestore.instance.collection(widget.str);
+
+    Future fetchItemList() async {
+      await ItemList.get().then((querySnapshot) {
+        for (var element in querySnapshot.docs) {
+          items.add(element.data());
+        }
+      });
+      setState(() {});
+    }
+
     super.initState();
     fetchItemList();
   }
@@ -51,8 +50,8 @@ class _CategoryPageState extends State<CategoryPage> {
             Navigator.pop(context);
           },
         ),
-        title: const Text(
-          "Glass Item Records",
+        title: Text(
+          "${widget.str} Item Records",
           style: TextStyle(
             color: Colors.white,
           ),
