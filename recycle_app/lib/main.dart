@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:recycle_app/screens/camera_page.dart';
+
 import 'package:recycle_app/screens/confirmation_page.dart';
 import 'package:recycle_app/screens/create_page.dart';
 import 'package:recycle_app/screens/login_page.dart';
 import 'package:recycle_app/screens/onboard_screen.dart';
+import 'package:recycle_app/screens/photo_page.dart';
 import 'package:recycle_app/screens/verification_page.dart';
 
 void main() {
@@ -15,15 +18,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const OnBoardScreen(),
+      home: PhotoPage(),
       routes: {
-        LoginPage.id :(context) => LoginPage(),
-        LoginPhone.id : (context) => const LoginPhone(),
-        CreateAccountPage.id : (context) => CreateAccountPage(),
-        VerificationPage.id : (context) =>const  VerificationPage(),
-      }
+        LoginPage.id: (context) => LoginPage(),
+        LoginPhone.id: (context) => const LoginPhone(),
+        CreateAccountPage.id: (context) => CreateAccountPage(),
+        VerificationPage.id: (context) => const VerificationPage(),
+        PhotoPage.id: (context) => PhotoPage(),
+      },
     );
   }
 }

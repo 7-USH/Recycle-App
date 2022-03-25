@@ -38,6 +38,8 @@ dependencies:
   avatar_glow: ^2.0.2
   google_fonts: ^2.3.1
   animated_text_kit: ^4.2.1
+  image_picker: ^0.8.4+11
+  camera:
 
 dev_dependencies:
   flutter_test:
