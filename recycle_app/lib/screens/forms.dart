@@ -8,8 +8,11 @@ import 'package:recycle_app/constants/constants.dart';
 class Formscreen extends StatefulWidget {
   static String id = "form";
 
+  String ImageURL;
+
   Formscreen({
     Key? key,
+    required this.ImageURL,
   }) : super(key: key);
 
   @override
