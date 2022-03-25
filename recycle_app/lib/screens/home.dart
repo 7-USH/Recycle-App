@@ -117,7 +117,7 @@ class _HomePageState extends State<HomePage> {
             icon: FaIcon(
               FontAwesomeIcons.home,
               color: Colors.white,
-              size: 30,
+              size: 30
             ),
             label: '',
           ), // ignore: prefer_const_constructors
