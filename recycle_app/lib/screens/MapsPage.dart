@@ -116,6 +116,8 @@ class _MapsPageState extends State<MapsPage> {
             mapToolbarEnabled: false,
             initialCameraPosition: _kGooglePlex,
             onMapCreated: _onMapCreated,
+            zoomControlsEnabled: false,
+            zoomGesturesEnabled: false,
             markers: _markers,
             onTap: (LatLng) {
               setState(() {
