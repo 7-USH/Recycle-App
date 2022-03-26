@@ -68,7 +68,7 @@ class _LoginPhoneState extends State<LoginPhone> {
                 ),
               ),
               Text(
-                "Login",
+                "Sign Up",
                 style: poppinFonts(Colors.white, FontWeight.bold, 30),
               ),
               Text(

@@ -89,7 +89,9 @@ class _MapsPageState extends State<MapsPage> {
               setState(() {});
             },
             infoWindow: InfoWindow(
-                title: "ffnfnf", snippet: 'Nice Place', onTap: () {}),
+                title: markerData[i]['type'],
+                snippet: markerData[i]['weight'] + " kg",
+                onTap: () {}),
             icon: BitmapDescriptor.defaultMarker,
           ),
         );
@@ -116,6 +118,8 @@ class _MapsPageState extends State<MapsPage> {
             mapToolbarEnabled: false,
             initialCameraPosition: _kGooglePlex,
             onMapCreated: _onMapCreated,
+            zoomControlsEnabled: false,
+            zoomGesturesEnabled: false,
             markers: _markers,
             onTap: (LatLng) {
               setState(() {

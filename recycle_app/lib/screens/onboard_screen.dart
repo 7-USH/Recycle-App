@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:recycle_app/constants/constants.dart';
 import 'package:recycle_app/screens/confirmation_page.dart';
+import 'package:recycle_app/screens/loading_screen.dart';
 
 class OnBoardScreen extends StatefulWidget {
   const OnBoardScreen({Key? key}) : super(key: key);
@@ -17,6 +18,16 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
   bool press = false;
   Color onPressColor = const Color(0xff01661c).withOpacity(0.5);
   Color buttonColor = const Color(0xff01661c);
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    Future.delayed(Duration(seconds: 3), () {
+      return LoadingScreen();
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -47,7 +58,8 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
             ),
             Text(
               "Sort trash with other users\nand help save the planet for posterity",
-              style: poppinFonts(Colors.white, FontWeight.normal, size.height/50),
+              style: poppinFonts(
+                  Colors.white, FontWeight.normal, size.height / 50),
               textAlign: TextAlign.left,
             ),
             Center(
