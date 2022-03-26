@@ -1,7 +1,6 @@
-// ignore_for_file: avoid_types_as_parameter_names
+// ignore_for_file: must_be_immutable
 
-import 'dart:async';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:recycle_app/constants/constants.dart';
@@ -22,9 +21,12 @@ class MapsPage extends StatefulWidget {
 }
 
 class _MapsPageState extends State<MapsPage> {
+  List collections = [];
+
   bool isTap = false;
 
   Set<Marker> _markers = {};
+
   late BitmapDescriptor mapMarker;
   double lat = 0.0;
   double lon = 0.0;
@@ -34,30 +36,64 @@ class _MapsPageState extends State<MapsPage> {
         const ImageConfiguration(), "assets/images/map_marker.jpg");
   }
 
+  List markerData = [];
+  Future fetchData() async {
+    collections.add(FirebaseFirestore.instance.collection("Glass"));
+    collections.add(FirebaseFirestore.instance.collection("Chemicals"));
+    collections.add(FirebaseFirestore.instance.collection("Electronics"));
+    collections.add(FirebaseFirestore.instance.collection("Paper"));
+    collections.add(FirebaseFirestore.instance.collection("Plastic"));
+    for (var item in collections) {
+      await item.get().then((querySnapshot) {
+        for (var element in querySnapshot.docs) {
+          markerData.add(
+            element.data(),
+          );
+        }
+      });
+    }
+    setState(() {
+      for (var item in markerData) {
+        print(item['username']);
+        print("");
+        print("");
+        print(item['latitude']);
+        print(item['longitude']);
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     lat = widget.souLat;
     lon = widget.souLon;
     setCustomMarker();
+    fetchData();
   }
 
   void _onMapCreated(GoogleMapController _controller) {
     _controller.setMapStyle(Utils.mapStyle);
     setState(() {
-      _markers.add(
-        Marker(
-          markerId: const MarkerId('id-1'),
-          position: LatLng(widget.souLat, widget.souLon),
-          onTap: () {
-            isTap = !isTap;
-            setState(() {});
-          },
-          infoWindow:
-              InfoWindow(title: 'Temp', snippet: 'Nice Place', onTap: () {}),
-          icon: mapMarker,
-        ),
-      );
+      print("KJFFKJFJKJANFBFJ");
+      for (int i = 0; i < markerData.length; i++) {
+        LatLng curLocation =
+            LatLng(markerData[i]['latitude'], markerData[i]['longitude']);
+        _markers.clear();
+        _markers.add(
+          Marker(
+            markerId: MarkerId(i.toString()),
+            position: curLocation,
+            onTap: () {
+              isTap = !isTap;
+              setState(() {});
+            },
+            infoWindow: InfoWindow(
+                title: "ffnfnf", snippet: 'Nice Place', onTap: () {}),
+            icon: BitmapDescriptor.defaultMarker,
+          ),
+        );
+      }
     });
   }
 
@@ -68,7 +104,7 @@ class _MapsPageState extends State<MapsPage> {
     final size = MediaQuery.of(context).size;
 
     CameraPosition _kGooglePlex = CameraPosition(
-      target: LatLng(lat, lon),
+      target: LatLng(widget.souLat, widget.souLon),
       zoom: 14.4746,
     );
 
@@ -80,12 +116,6 @@ class _MapsPageState extends State<MapsPage> {
             mapToolbarEnabled: false,
             initialCameraPosition: _kGooglePlex,
             onMapCreated: _onMapCreated,
-            zoomControlsEnabled: false,
-            myLocationButtonEnabled: false,
-            myLocationEnabled: false,
-            rotateGesturesEnabled: false,
-            zoomGesturesEnabled: false,
-            compassEnabled: false,
             markers: _markers,
             onTap: (LatLng) {
               setState(() {
@@ -107,22 +137,23 @@ class _MapsPageState extends State<MapsPage> {
               child: Hero(
                 tag: "1",
                 child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    clipBehavior: Clip.hardEdge,
-                    margin: const EdgeInsets.all(20),
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    height: size.height / 5.5,
-                    width: size.width / 1.2,
-                    decoration: BoxDecoration(
-                        color: scaffoldColor.withOpacity(0.8),
-                        borderRadius: BorderRadius.circular(50),
-                        boxShadow: kButtonShadows),
-                    child: Center(
-                      child: Text(
-                        "My location",
-                        style: poppinFonts(Colors.white, FontWeight.normal, 20),
-                      ),
-                    )),
+                  duration: const Duration(milliseconds: 200),
+                  clipBehavior: Clip.hardEdge,
+                  margin: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  height: size.height / 5.5,
+                  width: size.width / 1.2,
+                  decoration: BoxDecoration(
+                      color: scaffoldColor.withOpacity(0.8),
+                      borderRadius: BorderRadius.circular(50),
+                      boxShadow: kButtonShadows),
+                  child: Center(
+                    child: Text(
+                      "My location",
+                      style: poppinFonts(Colors.white, FontWeight.normal, 20),
+                    ),
+                  ),
+                ),
               ),
             ),
           )
