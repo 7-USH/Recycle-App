@@ -79,5 +79,7 @@ $ flutter run
 - We will be adding object detection to our app using Machine learning models.
 - We will be adding most of the recycling facilities and plants nearby using an appropiate api.
 ## Screenshots
+![1](https://user-images.githubusercontent.com/82898989/160222509-a359a15f-dd7b-4936-8ac3-6b3a3b639342.jpg)
+![3](https://user-images.githubusercontent.com/82898989/160222513-d8cbb015-d6cc-40fd-9869-42400307793f.jpg)
+![4](https://user-images.githubusercontent.com/82898989/160222515-c7da04b4-91e3-446b-b853-7f8c0348ab5c.jpg)
 
-![Screenshot alt text](https://img.freepik.com/free-photo/blue-purple-technology-circuit_73426-205.jpg "Here is a screenshot")
