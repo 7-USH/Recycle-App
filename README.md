@@ -4,7 +4,7 @@
 
 ## Team members
 * Tushar Mali - tush1245@gmail.com
-* Amogh Prabhu - avprabhu_b20@vjti.it.ac.in
+* Amogh Prabhu - avprabhu_b20@it.vjti.ac.in
 * Utkarsh Patil - utkarshpatil321@gmail.com
 * Soumitra Kand - soumitrakand3@gmail.com
 * Nirbhay Hanjura - hanjuranirbhay@gmail.com
