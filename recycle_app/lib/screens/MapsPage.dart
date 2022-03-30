@@ -20,10 +20,12 @@ class MapsPage extends StatefulWidget {
   State<MapsPage> createState() => _MapsPageState();
 }
 
+int index = 0;
+
+bool isTap = false;
+
 class _MapsPageState extends State<MapsPage> {
   List collections = [];
-
-  bool isTap = false;
 
   Set<Marker> _markers = {};
 
@@ -53,13 +55,7 @@ class _MapsPageState extends State<MapsPage> {
       });
     }
     setState(() {
-      for (var item in markerData) {
-        print(item['username']);
-        print("");
-        print("");
-        print(item['latitude']);
-        print(item['longitude']);
-      }
+      markerData;
     });
   }
 
@@ -90,8 +86,10 @@ class _MapsPageState extends State<MapsPage> {
             },
             infoWindow: InfoWindow(
                 title: markerData[i]['type'],
-                snippet: markerData[i]['weight'] + " kg",
-                onTap: () {}),
+                snippet: markerData[i]['weight'].toString() + " kg",
+                onTap: () {
+                  index = i;
+                }),
             icon: BitmapDescriptor.defaultMarker,
           ),
         );
@@ -103,8 +101,6 @@ class _MapsPageState extends State<MapsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     CameraPosition _kGooglePlex = CameraPosition(
       target: LatLng(widget.souLat, widget.souLon),
       zoom: 14.4746,
@@ -118,50 +114,89 @@ class _MapsPageState extends State<MapsPage> {
             mapToolbarEnabled: false,
             initialCameraPosition: _kGooglePlex,
             onMapCreated: _onMapCreated,
-            zoomControlsEnabled: false,
-            zoomGesturesEnabled: false,
             markers: _markers,
             onTap: (LatLng) {
-              setState(() {
-                isTap = false;
-              });
+              if (mounted) {
+                setState(() {
+                  isTap = false;
+                });
+              }
             },
           ),
-          AnimatedPositioned(
-            curve: Curves.easeInOut,
-            bottom: isTap ? pinVisible : pinInvisible,
-            duration: const Duration(milliseconds: 500),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: ((context) => RecycleItemPage())));
-              },
-              child: Hero(
-                tag: "1",
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  clipBehavior: Clip.hardEdge,
-                  margin: const EdgeInsets.all(20),
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  height: size.height / 5.5,
-                  width: size.width / 1.2,
-                  decoration: BoxDecoration(
-                      color: scaffoldColor.withOpacity(0.8),
-                      borderRadius: BorderRadius.circular(50),
-                      boxShadow: kButtonShadows),
-                  child: Center(
-                    child: Text(
-                      "My location",
-                      style: poppinFonts(Colors.white, FontWeight.normal, 20),
-                    ),
+          Descriptor(
+            markerList: markerData,
+            docID: index,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class Descriptor extends StatefulWidget {
+  final dynamic markerList;
+  int docID;
+
+  Descriptor({Key? key, required this.markerList, required this.docID})
+      : super(key: key);
+  @override
+  State<Descriptor> createState() => _DescriptorState();
+}
+
+class _DescriptorState extends State<Descriptor> {
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return AnimatedPositioned(
+      curve: Curves.easeInOut,
+      bottom: isTap ? pinVisible : pinInvisible,
+      duration: const Duration(milliseconds: 500),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => RecycleItemPage(
+                item: widget.markerList,
+                index: widget.docID,
+              ),
+            ),
+          );
+        },
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          clipBehavior: Clip.hardEdge,
+          margin: const EdgeInsets.all(20),
+          padding: const EdgeInsets.only(left: 20, right: 20),
+          height: size.height / 5.5,
+          width: size.width / 1.2,
+          decoration: BoxDecoration(
+              color: scaffoldColor.withOpacity(0.8),
+              borderRadius: BorderRadius.circular(50),
+              boxShadow: kButtonShadows),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 18, 0, 0),
+                child: Hero(
+                  tag: widget.docID,
+                  child: Text(
+                    "Material: " + widget.markerList[widget.docID]['type'],
+                    style: poppinFonts(Colors.white, FontWeight.w600, 21),
                   ),
                 ),
               ),
-            ),
-          )
-        ],
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
+                child: Text(
+                  widget.markerList[widget.docID]['Description'],
+                  style: poppinFonts(Colors.white, FontWeight.w200, 15),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

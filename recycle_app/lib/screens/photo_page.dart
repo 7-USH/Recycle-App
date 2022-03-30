@@ -9,7 +9,7 @@ import 'package:recycle_app/screens/camera_page.dart';
 import 'package:recycle_app/screens/confirm_picture.dart';
 
 class PhotoPage extends StatefulWidget {
-  PhotoPage({Key? key}) : super(key: key);
+  const PhotoPage({Key? key}) : super(key: key);
 
   static String id = "Photo Page";
 
@@ -20,9 +20,6 @@ class PhotoPage extends StatefulWidget {
 class _PhotoPageState extends State<PhotoPage> {
   bool press = false;
   bool press2 = false;
-
-  late PickedFile _imageFile;
-  final ImagePicker _picker = ImagePicker();
 
   @override
   Widget build(BuildContext context) {

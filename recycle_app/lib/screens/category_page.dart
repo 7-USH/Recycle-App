@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, must_be_immutable
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +54,7 @@ class _CategoryPageState extends State<CategoryPage> {
         ),
         title: Text(
           "${widget.str} Item Records",
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
           ),
         ),
@@ -79,34 +81,43 @@ class _CategoryPageState extends State<CategoryPage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              "Weight: " + items[index]["weight"] + " kg",
-                              style: poppinFonts(
-                                  Colors.white, FontWeight.bold, 20),
-                            ),
-                            Text(
-                              items[index]["Description"],
-                              style: poppinFonts(
-                                Colors.white,
-                                FontWeight.normal,
-                                12,
+                        child: SizedBox(
+                          width: size.width / 2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                "Weight: " + items[index]["weight"] + " kg",
+                                style: poppinFonts(
+                                    Colors.white, FontWeight.bold, 20),
                               ),
-                              textAlign: TextAlign.justify,
-                            ),
-                            Text(
-                              "by ${items[index]["username"]}",
-                              style: poppinFonts(
-                                  Colors.white, FontWeight.w200, 12),
-                            ),
-                          ],
+                              Expanded(
+                                child: Text(
+                                  items[index]["Description"],
+                                  style: poppinFonts(
+                                    Colors.white,
+                                    FontWeight.normal,
+                                    12,
+                                  ),
+                                  textAlign: TextAlign.justify,
+                                ),
+                              ),
+                              Text(
+                                "by ${items[index]["username"]}",
+                                style: poppinFonts(
+                                    Colors.white, FontWeight.w200, 12),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       Container(
                         height: 200,
+                        constraints: const BoxConstraints(
+                          maxHeight: 200,
+                          maxWidth: 100,
+                        ),
                         width: 100,
                         clipBehavior: Clip.antiAlias,
                         decoration: BoxDecoration(

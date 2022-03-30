@@ -1,31 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:recycle_app/constants/constants.dart';
 
-class RecycleItemPage extends StatefulWidget {
-  RecycleItemPage({Key? key}) : super(key: key);
-  static String id = "recyclepage";
+class RecycleItemPage extends StatelessWidget {
+  final dynamic item;
+  final int index;
+  const RecycleItemPage({Key? key, required this.item, required this.index})
+      : super(key: key);
 
-  @override
-  State<RecycleItemPage> createState() => _RecycleItemPageState();
-}
-
-class _RecycleItemPageState extends State<RecycleItemPage> {
   @override
   Widget build(BuildContext context) {
-    return Hero(
-        tag: "1",
-        child: Scaffold(
-          backgroundColor: scaffoldColor,
-          appBar: AppBar(
-            elevation: 0.0,
-            backgroundColor: Colors.transparent,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(Icons.arrow_back_ios),
+    final size = MediaQuery.of(context).size;
+    return Scaffold(
+      backgroundColor: scaffoldColor,
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 70, vertical: 40),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10),
+              ),
+              child: Container(
+                width: size.width / 1.6,
+                child: Image.network(
+                  item[index]['image'],
+                  fit: BoxFit.cover,
+                ),
+                height: size.height / 3,
+              ),
             ),
           ),
-        ));
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 65),
+            child: Text(
+              item[index]['type'],
+              style: poppinFonts(Colors.white, FontWeight.w500, 30),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 70),
+            child: Text(
+              item[index]['Description'],
+              style: poppinFonts(Colors.white, FontWeight.w200, 20),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
