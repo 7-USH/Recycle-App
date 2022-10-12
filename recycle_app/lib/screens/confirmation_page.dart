@@ -2,6 +2,7 @@
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:recycle_app/constants/constants.dart';
 import 'package:recycle_app/screens/create_page.dart';
 import 'package:recycle_app/screens/login_page.dart';
@@ -67,9 +68,11 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ],
             ),
-            SizedBox(
-              height: size.height / 10,
+            LottieBuilder.network(
+              "https://assets10.lottiefiles.com/packages/lf20_lcoullus.json",
+              width: 200,
             ),
+            SizedBox(height: size.height/15,),
             Center(
               child: Text(
                 "Let's get Started",
@@ -83,43 +86,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             SizedBox(height: size.height/30,),
-            GestureDetector(
-              onTap: () async {
-              setState(() {
-                    press1 = !press1;
-                  });
-                  Future.delayed(const Duration(milliseconds: 500), () {
-                    setState(() {
-                      press1 = !press1;
-                    });
-                  });
-                  await Navigator.pushNamed(context, CreateAccountPage.id);
-              },
-              child: Container(
-                width: size.width / 1.1,
-                height: size.height / 13,
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        colors: press1
-                            ? [Colors.blue, Colors.red]
-                            : [
-                                const Color(0xff00548e),
-                                const Color(0xff009297)
-                              ]),
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: kButtonShadows),
-                child: const Center(
-                  child: Text(
-                    "Create Account",
-                    style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 22,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ),
-            ),
             GestureDetector(
               onTap: ()  async{
                 setState(() {
@@ -147,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                     boxShadow: kButtonShadows),
                 child: const Center(
                   child: Text(
-                    "Login",
+                    "SignUp Now",
                     style: TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 22,
