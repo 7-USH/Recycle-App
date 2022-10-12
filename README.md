@@ -51,7 +51,7 @@ Tools and technologies that you learnt and used in the project.
 
 5. If you want to collaborate please contact the undersigned.
 
-## :point_right: How To Use
+## :point_right: How To Use the repository
 
 - To clone and run this application, you'll need [Git](https://git-scm.com) and [Flutter](https://flutter.dev/docs/get-started/install) installed on your computer. From your command line:
 ```bash
